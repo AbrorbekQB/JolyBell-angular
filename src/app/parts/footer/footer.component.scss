@@ -1,0 +1,117 @@
+.page--footer {
+    background: #000;
+    color: white;
+    font-family: Futura, sans-serif;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding-bottom: 30px;
+}
+.footer-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 100%;
+    color: #fff;
+    text-transform: uppercase;
+}
+.footer-menu-link {
+    color: white;
+    font-family: Futura, sans-serif;
+    position: relative;
+    &::after{
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        right: 50%;
+        width: 0;
+        height: 2px;
+        background-color: white;
+        transition: 0.5s;
+    }
+    &:hover::after{
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        right: 0;
+        width: 100%;
+        height: 2px;
+        background-color: white;
+    }
+}
+
+// footer second
+.footer-second {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.social-link__list {
+    display: flex;
+    align-items: center;
+    margin-bottom: 38px;
+}
+.social-link--item.jolybell {
+    cursor: pointer;
+}
+.social-link--item.instagram {
+    margin: 0 15px;
+}
+.copy-right__text {
+    display: inline-block;
+}
+.footer--middle {
+    margin-left: auto;
+    text-align: right;
+    margin-right: 50px;
+}
+.email--wrapper {
+    margin-bottom: 20px;
+}
+.email--top {
+    font-size: 14px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+.service-hours--header {
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+.footer-paymentoptions-prefix {
+    font-size: 14px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    text-align: right;
+}
+.footer-paymentoptions-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 150px;
+}
+.footer-paymentoptions-visa {
+    margin-bottom: 15px;
+    width: 53px;
+    height: 17px;
+}
+.footer-paymentoptions-wayforpay {
+    margin-bottom: 15px;
+    height: 17px;
+}
+.footer-paymentoptions-mastercard {
+    height: 64px;
+}
+.footer-paymentoptions-privat24 {
+    height: 64px;
+}
+.footer-thrid {
+    text-align: right;
+    p {
+        padding: 5px 0;
+    }
+}

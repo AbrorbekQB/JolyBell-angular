@@ -1,0 +1,34 @@
+<a class="category-product" routerLink="/product/{{ id }}">
+    <div class="category-product-cover">
+        <picture>
+            <source srcset="{{ imgURL }}" type="image/webp">
+            <img class="category-product-image" loading="lazy" src="{{ imgURL }}" alt="">
+        </picture>
+        <div class="price category-product-price">
+            <div class="price-current">
+                <span>{{ productCost }}&nbsp;USD</span>
+            </div>
+        </div>
+    </div>
+    <div class="category-product-name">
+        <span>{{ productName }}</span>
+    </div>
+</a>
+<!-- <a class="category-product" routerLink="/product/1234">
+    <div class="category-product-cover">
+        <picture>
+            <source srcset="https://cdn.jolybell.com/images/lFjJxGtNAzUzK4S.webp?width=387&height=360&quality=85"
+                type="image/webp">
+            <img class="category-product-image" loading="lazy"
+                src="https://cdn.jolybell.com/images/lFjJxGtNAzUzK4S.webp?width=387&height=360&quality=85" alt="">
+        </picture>
+        <div class="price category-product-price">
+            <div class="price-current">
+                <span>26.5&nbsp;USD</span>
+            </div>
+        </div>
+    </div>
+    <div class="category-product-name">
+        <span>productName</span>
+    </div>
+</a> -->
