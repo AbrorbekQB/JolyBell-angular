@@ -1,25 +1,62 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import {Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 
 export class ApiService {
-    constructor(
-        private http: HttpClient
-    ) {
+  constructor(
+    private http: HttpClient
+  ) {
 
-    }
+  }
 
-    getProductsListApi(): Observable<any> {
-        return this.http.get('http://localhost:8080/product/list')
-    }
+  // order
+  createOrder(orderData: any): Observable<any> {
+    return this.http.post('http://localhost:8080/order/create', orderData)
+  }
 
-    postApi(cost: number): Observable<any> {
-        return this.http.post('http://localhost:8080/product/put', {
-            cost
-        })
-    }
+  updateOrder(orderData: any): Observable<any> {
+    return this.http.post('http://localhost:8080/order/update', orderData)
+  }
+
+  getTotalCostApi(cartId: any): Observable<any> {
+    return this.http.get(`http://localhost:8080/order/get/${cartId}`)
+  }
+
+  // product
+  getProductsListApi(): Observable<any> {
+    return this.http.get('http://localhost:8080/product/list')
+  }
+
+  postApi(cost: number): Observable<any> {
+    return this.http.post('http://localhost:8080/product/put', {
+      cost
+    })
+  }
+
+  getById(id: string): Observable<any> {
+    return this.http.get('http://localhost:8080/product/get/' + id)
+  }
+
+  // category
+  getCategoryList(): Observable<any> {
+    return this.http.get('http://localhost:8080/category/list')
+  }
+
+  // user and auth
+  login(username: string, password: string): Observable<any> {
+    return this.http.post('http://localhost:8080/user/login', {
+      username,
+      password
+    })
+  }
+
+  forgot(username: string): Observable<any> {
+    return this.http.post('http://localhost:8080/auth/forgot', {
+      username
+    })
+  }
 }

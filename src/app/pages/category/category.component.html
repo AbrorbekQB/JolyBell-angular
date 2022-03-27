@@ -7,8 +7,13 @@
             {{ categoryName | uppercase }}
         </h1>
         <div class="card__list" *ngIf="productList.length; else loader">
-            <app-card *ngFor="let product of productList" [id]="product.id" [productCost]="product.cost"
-                [imgURL]="product.imageItems[0].url" [productName]="product.name"></app-card>
+            <app-card
+              *ngFor="let product of productList"
+              [id]="product.id"
+              [productCost]="product.cost"
+              [imgURL]="product.imageItems[0].url"
+              [productName]="product.name">
+            </app-card>
         </div>
         <ng-template #loader>
             <div class="lds-ring">
@@ -18,10 +23,10 @@
             </div>
         </ng-template>
 
-        <form [formGroup]="form" (submit)="formSubmit()">-->
-            <input formControlName="cost" type="text" placeholder="Cost">
-            <button type="submit">Submit</button>
-        </form>
+        <!-- <form [formGroup]="form" (submit)="formSubmit()">-->
+        <!-- <input formControlName="cost" type="text" placeholder="Cost"> -->
+        <!-- <button type="submit">Submit</button> -->
+        <!-- </form> -->
     </div>
 </section>
 <app-footer></app-footer>
