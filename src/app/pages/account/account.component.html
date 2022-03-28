@@ -1,0 +1,78 @@
+<div class="category--header">
+  <app-header></app-header>
+</div>
+
+<section class="account__section">
+  <div class="container">
+    <h1 class="account__heading">
+      My Profile
+    </h1>
+    <div class="personal-info__wrapper">
+      <h2 class="form__heading">Personal data</h2>
+      <!--        <button class="log-out__btn" type="button">Log out</button>-->
+      <form class="personal-info-form" [formGroup]="personalUpdateForm">
+        <div class="account__left">
+          <label>Name</label>
+          <input type="text" value="{{personalInfo.firstname}}">
+          <label>Patronymic</label>
+          <input type="text" value="{{personalInfo.patronymic}}">
+          <label>Email address</label>
+          <input type="email" disabled value="{{personalInfo.username}}">
+          <button class="log-out__btn" type="submit">Log out</button>
+        </div>
+        <div class="account__right">
+          <label>Surname</label>
+          <input type="text" value="{{personalInfo.lastname}}">
+          <label>Phone number</label>
+          <input type="text" value="{{personalInfo.phoneNumber}}">
+          <button class="update__btn" type="submit">Update</button>
+        </div>
+      </form>
+
+    </div>
+    <div class="delivery__wrapper">
+      <h2 class="form__heading">
+        Delivery address
+      </h2>
+      <form class="delivery__form">
+        <div class="delivery__from__top">
+          <div class="account__left">
+            <label>Province</label>
+            <input type="text">
+          </div>
+          <div class="account__right">
+            <label>District</label>
+            <input type="text">
+          </div>
+        </div>
+        <textarea type="text">
+
+        </textarea>
+        <button class="update__btn">
+          Update
+        </button>
+      </form>
+    </div>
+
+    <div class="change-password__wrapper">
+      <h2 class="form__heading">
+        Password
+      </h2>
+      <form class="password__form">
+        <div class="password-input__wrapper">
+          <div class="account__left">
+            <label>New password</label>
+            <input type="password">
+          </div>
+          <div class="account__right">
+            <label>Repeat password</label>
+            <input type="password">
+          </div>
+        </div>
+        <button class="update__btn">Update</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

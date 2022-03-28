@@ -126,7 +126,7 @@
                 </ng-container>
                 <div class="wrapper">
                   <div class="forgot__link" (click)="forgotPopupOpen()">Forgot password?</div>
-                  <p class="response__alert" *ngIf="invalidLogin">Invalide username or password</p>
+<!--                  <p class="response__alert" >Invalide username or password</p>-->
                 </div>
                 <button class="signin__btn" type="button" sign-in-pending="false"
                         [disabled]="form.invalid" (click)="login()">
@@ -147,16 +147,67 @@
             </div>
           </div>
         </div>
-        <div class="sign-up__modal">
+        <div class="sign-up__modal" *ngIf="signupShow">
           <form [formGroup]="signupFrom" class="sign-up-form">
+            <div class="close__btn" (click)="closeModal()">
+              <div class="inside"></div>
+            </div>
             <h2 class="sign-up__heading">Sign up</h2>
             <label for="sign-up-email">EMAIL ADDRESS</label>
-            <input type="email" id="sign-up-email" formControlName="username">
+            <input type="email" id="sign-up-email" formControlName="username"
+                   [ngClass]="{
+                   'error':signupFrom.controls['username'].touched
+                   && signupFrom.controls['username'].errors
+                   }">
+            <ng-container
+              *ngIf="signupFrom.controls['username'].touched && signupFrom.controls['username'].errors">
+                                    <span style="color: red;"
+                                          *ngIf="signupFrom.controls['username'].errors['required']">Username is
+                                        required</span>
+              <span style="color: red;" *ngIf="signupFrom.controls['username'].errors['email']">Username
+                                        must be
+                                        email</span>
+            </ng-container>
             <label for="sign-up-password">PASSWORD</label>
-            <input type="password" id="sign-up-password" formControlName="password">
+            <input type="password" id="sign-up-password" formControlName="password" [ngClass]="{
+                                    'error': signupFrom.controls['password'].touched && signupFrom.controls['password'].errors
+                                }">
+            <ng-container
+              *ngIf="signupFrom.controls['password'].touched && signupFrom.controls['password'].errors">
+                                    <span style="color: red;"
+                                          *ngIf="signupFrom.controls['password'].errors['required']">Password is
+                                        required</span>
+              <span style="color: red;" *ngIf="signupFrom.controls['password'].errors['minlength']">Must
+                                        be 8 chart at
+                                        least</span>
+            </ng-container>
             <label for="sign-up-repeat-password">REPEAT PASSWORD</label>
-            <input type="password" id="sign-up-repeat-password">
-            <button type="submit">SIGN UP</button>
+            <input type="password" id="sign-up-repeat-password" formControlName="repeatPassword" [ngClass]="{
+                                    'error': signupFrom.controls['repeatPassword'].touched && (signupFrom.controls['repeatPassword'].errors
+                                    || signupFrom.controls['password'].value != signupFrom.controls['repeatPassword'].value)
+                                }">
+            <ng-container
+              *ngIf="signupFrom.controls['repeatPassword'].touched && signupFrom.controls['repeatPassword'].errors
+                && !signupFrom.controls['password'].value != signupFrom.controls['repeatPassword'].value">
+                                    <span style="color: red;"
+                                          *ngIf="signupFrom.controls['repeatPassword'].errors['required']">Password is
+                                        required</span>
+              <span style="color: red;" *ngIf=" signupFrom.controls['repeatPassword'].errors['minlength']">Must
+                                        be 8 chart at
+                                        least</span>
+            </ng-container>
+            <ng-container
+              *ngIf="signupFrom.controls['repeatPassword'].touched
+              && signupFrom.controls['repeatPassword'].errors
+              && !signupFrom.controls['repeatPassword'].errors['minlength']
+              && signupFrom.controls['password'].value != signupFrom.controls['repeatPassword'].value">
+                            <span style="color: red"
+                                  *ngIf="signupFrom.controls['password'].value != signupFrom.controls['repeatPassword'].value">
+                Repeat Password doesn't match Password
+              </span>
+            </ng-container>
+            <!--            <p class="server-response__text">Salom</p>-->
+            <button type="submit" [disabled]="signupFrom.invalid" (click)="registration()">SIGN UP</button>
           </form>
         </div>
         <div class="header-cart" routerLink="/order/1234">

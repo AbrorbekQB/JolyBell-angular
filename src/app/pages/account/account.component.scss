@@ -1,0 +1,129 @@
+.account__section {
+  padding: 50px 0;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.account__heading {
+  font-size: 38px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.form__heading {
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 100%;
+  padding: 30px 0;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: rgba(58, 56, 56, 0.62);
+    top: 16px;
+    left: 0;
+  }
+}
+
+form {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.account__left,
+.account__right {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.account__right {
+  input {
+    margin-left: auto;
+  }
+
+  label {
+    margin-left: 20%;
+  }
+}
+
+label {
+  font-size: 15px;
+  line-height: 25px;
+  color: #818d92;
+  text-transform: uppercase;
+}
+
+input {
+  width: 80%;
+  border-radius: 6px;
+  border: 1px solid #818d92;
+  background-color: #F4F6F8;
+  padding: 8px 10px;
+  margin-bottom: 24px;
+
+  &:disabled {
+    border: none;
+  }
+}
+
+.log-out__btn,
+.update__btn {
+  width: 200px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: none;
+  background-color: #0d760d;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-left: auto;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+.log-out__btn {
+  margin-right: 20%;
+  margin-top: 20px;
+}
+.update__btn {
+  margin-top: 25px;
+}
+
+.log-out__btn {
+  background-color: red;
+}
+
+.delivery__from__top {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.delivery__form {
+  flex-direction: column;
+}
+
+.password__form {
+  flex-direction: column;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #818d92;
+  background-color: #F4F6F8;
+}
+
+.password-input__wrapper {
+  display: flex;
+  width: 100%;
+}

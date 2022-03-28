@@ -5,6 +5,7 @@ import { CategoryComponent } from './pages/category/category.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { ProductComponent } from './pages/product/product.component';
 import {OrderComponent} from "./pages/order/order.component";
+import {AccountComponent} from "./pages/account/account.component";
 
 const routes: Routes = [{
     path: '',
@@ -21,6 +22,9 @@ const routes: Routes = [{
 }, {
   path: 'order/:id',
   component: OrderComponent
+},{
+  path:'account',
+  component: AccountComponent
 }];
 
 @NgModule({

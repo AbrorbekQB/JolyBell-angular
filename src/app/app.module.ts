@@ -17,6 +17,7 @@ import {OrderComponent} from './pages/order/order.component';
 import {ToastrModule} from "ngx-toastr";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AuthInterceptor} from "./shared/interceptor/authInterceptor";
+import { AccountComponent } from './pages/account/account.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {AuthInterceptor} from "./shared/interceptor/authInterceptor";
     FaqComponent,
     ProductComponent,
     OrdersModalComponent,
-    OrderComponent
+    OrderComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
