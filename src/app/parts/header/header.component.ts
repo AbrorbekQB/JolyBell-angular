@@ -63,10 +63,8 @@ export class HeaderComponent implements OnInit {
     console.log(this.form.value.username, this.form.value.password)
     this.apiService.login(this.form.value.username, this.form.value.password)
       .subscribe(res => {
-        console.log(res);
         this.closeModal()
-        localStorage.setItem('access_token', res.access_token)
-        localStorage.setItem('refresh_token', res.refresh_token)
+        localStorage.setItem('Authorization', res.Authorization)
       }, err => {
         this.notifyService.showError("Username or password invalid")
       })
@@ -115,7 +113,7 @@ export class HeaderComponent implements OnInit {
   }
 
   hasToken() {
-    if (localStorage.getItem('access_token'))
+    if (localStorage.getItem('Authorization'))
       return true;
     return false;
   }
