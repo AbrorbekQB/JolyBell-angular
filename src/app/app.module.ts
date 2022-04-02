@@ -18,6 +18,7 @@ import {ToastrModule} from "ngx-toastr";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AuthInterceptor} from "./shared/interceptor/authInterceptor";
 import { AccountComponent } from './pages/account/account.component';
+import { CarouselComponent } from './parts/carousel/carousel.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { AccountComponent } from './pages/account/account.component';
     ProductComponent,
     OrdersModalComponent,
     OrderComponent,
-    AccountComponent
+    AccountComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,

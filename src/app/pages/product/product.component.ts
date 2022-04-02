@@ -26,14 +26,16 @@ export class ProductComponent implements OnInit {
     size: [],
     descriptionItems: [{
       name: ""
-    }]
+    }],
+    imageItems: []
   }
 
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
     private notifyService: NotificationService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe((data: any) => {
@@ -61,9 +63,9 @@ export class ProductComponent implements OnInit {
 
   addToCart() {
     this.formOrder.value.count = this.count
-    if (localStorage.getItem('cartId')){
+    if (localStorage.getItem('cartId')) {
       // @ts-ignore
-      this.apiService.updateOrder(localStorage.getItem('cartId'),{
+      this.apiService.updateOrder(localStorage.getItem('cartId'), {
         productId: this.productDetail.id,
         ...this.formOrder.value,
         cost: this.productDetail.cost
@@ -98,19 +100,19 @@ export class ProductComponent implements OnInit {
       this.count--
   }
 
-  showToasterSuccess(message: string){
+  showToasterSuccess(message: string) {
     this.notifyService.showSuccess(message)
   }
 
-  showToasterError(message: string){
+  showToasterError(message: string) {
     this.notifyService.showError(message)
   }
 
-  showToasterInfo(message: string){
+  showToasterInfo(message: string) {
     this.notifyService.showInfo(message)
   }
 
-  showToasterWarning(message: string){
+  showToasterWarning(message: string) {
     this.notifyService.showWarning(message)
   }
 
