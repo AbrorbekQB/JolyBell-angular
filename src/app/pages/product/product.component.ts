@@ -60,15 +60,16 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart() {
+    this.formOrder.value.count = this.count
     if (localStorage.getItem('cartId')){
-      this.apiService.updateOrder({
-        id: localStorage.getItem('cartId'),
+      // @ts-ignore
+      this.apiService.updateOrder(localStorage.getItem('cartId'),{
         productId: this.productDetail.id,
         ...this.formOrder.value,
-        cost: 120000
+        cost: this.productDetail.cost
       }).subscribe(res => {
         console.log(res)
-        this.showToasterSuccess("add successfuly!")
+        this.showToasterSuccess("Update successfully!")
       }, error => {
         this.showToasterError("Error add")
       })
@@ -76,11 +77,12 @@ export class ProductComponent implements OnInit {
       return
     }
     this.apiService.createOrder({
-      id: this.productDetail.id,
+      productId: this.productDetail.id,
       ...this.formOrder.value,
-      cost: 120000
+      cost: this.productDetail.cost
     }).subscribe(res => {
       console.log(res)
+      this.showToasterSuccess("Create successfully!")
     }, err => {
       localStorage.setItem('cartId', err.error.text)
     })
@@ -89,13 +91,11 @@ export class ProductComponent implements OnInit {
   increment() {
     if (this.count <= 20)
       this.count++
-    console.log(this.count);
   }
 
   decrement() {
     if (this.count > 1)
       this.count--
-    console.log(this.count);
   }
 
   showToasterSuccess(message: string){

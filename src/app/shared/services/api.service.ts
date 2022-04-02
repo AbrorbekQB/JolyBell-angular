@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 
 export class ApiService {
   private url: string = 'http://localhost:8080'
+
   constructor(
     private http: HttpClient
   ) {
@@ -16,56 +17,56 @@ export class ApiService {
 
   // auth
   registration(username: string, password: string): Observable<any> {
-    return this.http.post(this.url+'/auth/registration', {
+    return this.http.post(this.url + '/auth/registration', {
       username,
       password
     })
   }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post(this.url+'/auth/login', {
+    return this.http.post(this.url + '/auth/login', {
       username,
       password
     })
   }
 
   forgot(username: string): Observable<any> {
-    return this.http.post(this.url+'/auth/forgot', {
+    return this.http.post(this.url + '/auth/forgot', {
       username
     })
   }
 
   // order
   createOrder(orderData: any): Observable<any> {
-    return this.http.post(this.url+'/order/create', orderData)
+    return this.http.post(this.url + '/order/create', orderData)
   }
 
-  updateOrder(orderData: any): Observable<any> {
-    return this.http.post(this.url+'/order/update', orderData)
+  updateOrder(orderId: string, orderData: any): Observable<any> {
+    return this.http.post(this.url + '/order/update/' + orderId, orderData)
   }
 
   getTotalCostApi(cartId: any): Observable<any> {
-    return this.http.get(this.url+`/order/get/${cartId}`)
+    return this.http.get(this.url + `/order/get/${cartId}`)
   }
 
   // product
-  getProductsListApi(): Observable<any> {
-    return this.http.get(this.url+'/product/list')
+  getProductsListApi(category: string): Observable<any> {
+    return this.http.get(this.url + '/product/list/' + category)
   }
 
   postApi(cost: number): Observable<any> {
-    return this.http.post(this.url+'/product/put', {
+    return this.http.post(this.url + '/product/put', {
       cost
     })
   }
 
   getById(id: string): Observable<any> {
-    return this.http.get(this.url+'/product/get/' + id)
+    return this.http.get(this.url + '/product/get/' + id)
   }
 
   // category
   getCategoryList(): Observable<any> {
-    return this.http.get(this.url+'/category/list')
+    return this.http.get(this.url + '/category/list')
   }
 
   // user
