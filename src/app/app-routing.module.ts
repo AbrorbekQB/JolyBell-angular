@@ -7,6 +7,7 @@ import {ProductComponent} from './pages/product/product.component';
 import {OrderComponent} from "./pages/order/order.component";
 import {AccountComponent} from "./pages/account/account.component";
 import {PurchaseComponent} from "./pages/purchase/purchase.component";
+import {OrdersCheckoutComponent} from "./pages/orders-checkout/orders-checkout.component";
 
 const routes: Routes = [{
   path: '',
@@ -29,6 +30,9 @@ const routes: Routes = [{
 }, {
   path: 'purchase',
   component: PurchaseComponent
+}, {
+  path: 'orders/checkout',
+  component: OrdersCheckoutComponent
 }, {
   path: 'admin',
   loadChildren: () => import('./admin/admin.module').then(module => module.AdminModule),

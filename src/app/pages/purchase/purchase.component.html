@@ -1,10 +1,10 @@
 <div class="category--header">
   <app-header></app-header>
 </div>
-<section class="purchase--section">
+<section class="page--section">
 
   <div class="container">
-    <h1 class="purchase--heading">
+    <h1 class="section--heading">
       My purchases
     </h1>
     <ul *ngIf="orderDetails.orderItems.length" class="card__list">
@@ -36,16 +36,6 @@
       </li>
     </ul>
 
-    <!--    <form class="promocode__form">-->
-    <!--      <label>-->
-    <!--        <span>Promocode:</span>-->
-    <!--        <input type="text">-->
-    <!--      </label>-->
-    <!--      <button class="black-white__btn" type="submit">-->
-    <!--        Apply-->
-    <!--      </button>-->
-    <!--    </form>-->
-
     <table *ngIf="orderDetails.orderItems.length" class="purchase__table">
       <tr>
         <th class="table__heading">COST OF THE ITEMS:</th>
@@ -56,7 +46,7 @@
         <td class="table__text">5.0 USD</td>
         <td class="table__btn">
           <button class="black-white__btn" type="button" (click)="bookedOrder()">
-            CHechout
+            Confirm
           </button>
         </td>
       </tr>

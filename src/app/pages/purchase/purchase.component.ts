@@ -55,7 +55,7 @@ export class PurchaseComponent implements OnInit {
   bookedOrder() {
     if (localStorage.getItem("Authorization")) {
       this.apiService.getUserDetails().subscribe(res => {
-        this.router.navigate(['/order/payment']).then()
+        this.router.navigate(['/orders/checkout']).then()
         this.notifyService.showSuccess("Order successfully booked!")
       }, () => {
         this.notifyService.showWarning("Sorry! Only Registered user can do booking!")

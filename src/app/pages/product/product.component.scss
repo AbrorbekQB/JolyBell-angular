@@ -1,4 +1,4 @@
-.product--section{
+.page--section{
 background-color: rgb(235,230,232);
 }
 .product-content {
@@ -120,7 +120,7 @@ background-color: rgb(235,230,232);
     display: flex;
 }
 .product-info-count--left {
-    width: 42px; 
+    width: 42px;
     border-top-left-radius: 24px;
     border-bottom-left-radius: 24px;
 }
@@ -130,7 +130,7 @@ background-color: rgb(235,230,232);
     border-left: none;
     border-right: none;
 }
-.product-info-count--right { 
+.product-info-count--right {
     width: 42px;
     border-top-right-radius: 24px;
     border-bottom-right-radius: 24px;

@@ -81,4 +81,12 @@ export class ApiService {
   removeOrderItem(removeData: any): Observable<any> {
     return this.http.post(`${this.url}/order/remove/item`, removeData)
   }
+
+  checkPromocode(code: string, orderId: string): Observable<any> {
+    return this.http.post(`${this.url}/promocode/check`, {
+      orderId: orderId,
+      code: code
+    })
+
+  }
 }

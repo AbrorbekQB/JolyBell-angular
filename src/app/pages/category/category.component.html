@@ -1,9 +1,9 @@
 <div class="category--header">
   <app-header></app-header>
 </div>
-<section class="category--section">
+<section class="page--section">
   <div class="container">
-    <h1 class="category--heading">
+    <h1 class="section--heading">
       {{ categoryName | uppercase }}
     </h1>
     <div class="card__list" *ngIf="productList.length; else loader">

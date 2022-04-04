@@ -1,0 +1,21 @@
+<div class="category--header">
+  <app-header></app-header>
+</div>
+<div class="page--section">
+  <div class="container">
+    <h1 class="section--heading">
+      My purchases
+    </h1>
+
+    <form class="promocode__form" [formGroup]="promocodeForm" (submit)="checkPromoCode()">
+      <label>
+        <span>Promocode:</span>
+        <input type="text" formControlName="code">
+      </label>
+      <button class="black-white__btn" type="submit">
+        Apply
+      </button>
+    </form>
+  </div>
+</div>
+<app-footer></app-footer>

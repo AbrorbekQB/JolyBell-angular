@@ -97,12 +97,11 @@ li {
   margin: 0 auto;
 }
 
-.category--heading,
-.product--heading,
-.purchase--heading {
+.section--heading {
   font-size: 38px;
   font-weight: 500;
   padding: 10px 0 50px;
+  margin-top: 30px;
   text-align: center;
 }
 
@@ -117,10 +116,8 @@ li {
   }
 }
 
-.category--section,
-.product--section,
-.purchase--section {
-  padding: 50px 0 100px;
+.page--section {
+  padding: 30px 0 100px;
 }
 
 .lds-ring {

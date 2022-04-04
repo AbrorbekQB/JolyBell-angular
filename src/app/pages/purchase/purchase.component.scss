@@ -129,41 +129,6 @@ h3.card__heading {
   border: none;
 }
 
-.promocode__form {
-  width: 500px;
-  margin: 0 auto;
-  position: relative;
-
-  label {
-    display: flex;
-    flex-direction: column;
-
-    span {
-      margin-bottom: 9px;
-      font-size: 20px;
-      font-weight: 400;
-      line-height: 1.6;
-      text-transform: uppercase;
-      color: #818d92;
-    }
-  }
-
-  button {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-  }
-
-  input {
-    border-radius: 30px;
-    height: 40px;
-    padding: 0 30px 0 20px;
-    border: none;
-    background-color: #F4F6F8;
-    font-size: 22px;
-  }
-}
-
 .purchase__table {
   margin: 0 auto;
   width: 700px;
