@@ -74,4 +74,11 @@ export class ApiService {
     return this.http.get(`${this.url}/user/get`)
   }
 
+  getOrderById(orderId: string): Observable<any> {
+    return this.http.get(`${this.url}/order/${orderId}`)
+  }
+
+  removeOrderItem(removeData: any): Observable<any> {
+    return this.http.post(`${this.url}/order/remove/item`, removeData)
+  }
 }

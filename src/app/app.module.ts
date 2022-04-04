@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AuthInterceptor} from "./shared/interceptor/authInterceptor";
 import { AccountComponent } from './pages/account/account.component';
 import { CarouselComponent } from './parts/carousel/carousel.component';
+import { PurchaseComponent } from './pages/purchase/purchase.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { CarouselComponent } from './parts/carousel/carousel.component';
     OrdersModalComponent,
     OrderComponent,
     AccountComponent,
-    CarouselComponent
+    CarouselComponent,
+    PurchaseComponent
   ],
   imports: [
     BrowserModule,

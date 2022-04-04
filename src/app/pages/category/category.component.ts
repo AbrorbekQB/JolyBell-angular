@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from "../../shared/services/api.service";
 import {FormControl, FormGroup} from "@angular/forms";
@@ -9,7 +9,7 @@ import {FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./category.component.scss']
 })
 
-export class CategoryComponent implements OnInit {
+export class CategoryComponent implements OnInit, OnChanges {
   public categoryName: string = ""
   public productList: Array<any> = []
   public form: FormGroup = new FormGroup({
@@ -26,6 +26,12 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((data: any) => {
       this.categoryName = data.categoryName
+      this.apiService.getProductsListApi(this.categoryName).subscribe(res => {
+        this.productList = res
+      }, err => {
+        console.log(err)
+        this.router.navigate(['/']).then()
+      })
     })
 
     this.apiService.getProductsListApi(this.categoryName).subscribe(res => {
@@ -38,7 +44,10 @@ export class CategoryComponent implements OnInit {
 
   formSubmit() {
     this.apiService.postApi(this.form.value.cost).subscribe(res => {
-      console.log(res)
     })
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
   }
 }

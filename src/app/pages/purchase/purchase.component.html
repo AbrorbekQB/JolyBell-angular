@@ -1,0 +1,70 @@
+<div class="category--header">
+  <app-header></app-header>
+</div>
+<section class="purchase--section">
+
+  <div class="container">
+    <h1 class="purchase--heading">
+      My purchases
+    </h1>
+    <ul *ngIf="orderDetails.orderItems.length" class="card__list">
+      <li *ngFor="let orderItem of orderDetails.orderItems" class="card__item">
+        <div class="card__left">
+          <img [src]="orderItem.url">
+        </div>
+        <div class="card__right">
+          <h2 class="card__heading">
+            {{orderItem.name}}
+          </h2>
+          <h3 *ngIf="orderItem.size" class="card__heading">
+            Size:
+          </h3>
+          <p *ngIf="orderItem.size" class="card__text">{{orderItem.size.toUpperCase()}}</p>
+          <h3 class="card__heading">
+            Quantity:
+          </h3>
+          <p class="card__text">
+            {{orderItem.count}}
+          </p>
+          <p class="card__cost">
+            <span>{{orderItem.cost * orderItem.count}} USD</span>
+          </p>
+        </div>
+        <div class="card__close" (click)="remove(orderItem.id, orderItem.productId)">
+          <div></div>
+        </div>
+      </li>
+    </ul>
+
+    <!--    <form class="promocode__form">-->
+    <!--      <label>-->
+    <!--        <span>Promocode:</span>-->
+    <!--        <input type="text">-->
+    <!--      </label>-->
+    <!--      <button class="black-white__btn" type="submit">-->
+    <!--        Apply-->
+    <!--      </button>-->
+    <!--    </form>-->
+
+    <table *ngIf="orderDetails.orderItems.length" class="purchase__table">
+      <tr>
+        <th class="table__heading">COST OF THE ITEMS:</th>
+        <td class="table__text">{{orderDetails.totalAmount}} USD</td>
+      </tr>
+      <tr>
+        <th class="table__heading">DELIVERY COST:</th>
+        <td class="table__text">5.0 USD</td>
+        <td class="table__btn">
+          <button class="black-white__btn" type="button" (click)="bookedOrder()">
+            CHechout
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <th class="table__heading">TOTAL DUE:</th>
+        <td style="font-weight: 600" class="table__text">{{orderDetails.totalAmount + 5.0}} USD</td>
+      </tr>
+    </table>
+  </div>
+</section>
+<app-footer></app-footer>

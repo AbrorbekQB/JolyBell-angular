@@ -197,19 +197,10 @@
 .popup-layer {
   position: fixed;
   top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
-}
-
-.popup-layer {
-  position: fixed;
-  top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 2;
+  z-index: 12;
   background-color: rgba(0, 0, 0, .43);
 }
 
@@ -217,7 +208,7 @@
   position: absolute;
   width: 400px;
   background-color: rgba(255, 0, 0, 0.123);
-  z-index: 3;
+  z-index: 13;
   top: 44px;
   right: -95px;
   background-color: #fff;
@@ -407,6 +398,8 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 11;
+  background-color: rgba(0, 0, 0, .43);
 }
 
 .sign-up-form {
@@ -418,6 +411,7 @@ input {
 
   display: flex;
   flex-direction: column;
+  z-index: 13;
 
   input {
     background-color: #F4F6F8;

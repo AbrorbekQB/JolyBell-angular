@@ -39,14 +39,14 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.getCategoryList().subscribe(res => {
-      console.log(res);
+      // console.log(res);
 
       this.categoryList = res
     }, err => {
       this.router.navigate(['/']).then()
     })
     if (localStorage.getItem('cartId')) {
-      this.cartService.getTotalCost(localStorage.getItem('cartId'))
+      // this.cartService.getTotalCost(localStorage.getItem('cartId'))
     }
   }
 

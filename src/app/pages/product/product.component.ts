@@ -1,4 +1,3 @@
-import {ThisReceiver} from '@angular/compiler';
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ApiService} from "../../shared/services/api.service";
@@ -84,8 +83,8 @@ export class ProductComponent implements OnInit {
       cost: this.productDetail.cost
     }).subscribe(res => {
       console.log(res)
-      this.showToasterSuccess("Create successfully!")
     }, err => {
+      this.showToasterSuccess("Create successfully!")
       localStorage.setItem('cartId', err.error.text)
     })
   }
