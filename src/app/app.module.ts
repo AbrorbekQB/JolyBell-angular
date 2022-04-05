@@ -20,7 +20,8 @@ import {AuthInterceptor} from "./shared/interceptor/authInterceptor";
 import { AccountComponent } from './pages/account/account.component';
 import { CarouselComponent } from './parts/carousel/carousel.component';
 import { PurchaseComponent } from './pages/purchase/purchase.component';
-import {OrdersCheckoutComponent} from "./pages/orders-checkout/orders-checkout.component";
+import {BookingComponent} from "./pages/booking/booking.component";
+import { ChoisePaymentComponent } from './pages/choise-payment/choise-payment.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import {OrdersCheckoutComponent} from "./pages/orders-checkout/orders-checkout.c
     AccountComponent,
     CarouselComponent,
     PurchaseComponent,
-    OrdersCheckoutComponent
+    BookingComponent,
+    ChoisePaymentComponent
   ],
   imports: [
     BrowserModule,

@@ -696,4 +696,9 @@ button.toast-close-button {
   padding: 0 50px;
   text-transform: uppercase;
   cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
 }

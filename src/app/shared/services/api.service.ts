@@ -49,6 +49,18 @@ export class ApiService {
     return this.http.get(this.url + `/order/get/${cartId}`)
   }
 
+  getOrderById(orderId: string): Observable<any> {
+    return this.http.get(`${this.url}/order/${orderId}`)
+  }
+
+  removeOrderItem(removeData: any): Observable<any> {
+    return this.http.post(`${this.url}/order/remove/item`, removeData)
+  }
+
+  orderConfirm(orderId: any): Observable<any> {
+    return this.http.get(`${this.url}/order/confirm/${orderId}`)
+  }
+
   // product
   getProductsListApi(category: string): Observable<any> {
     return this.http.get(this.url + '/product/list/' + category)
@@ -74,13 +86,7 @@ export class ApiService {
     return this.http.get(`${this.url}/user/get`)
   }
 
-  getOrderById(orderId: string): Observable<any> {
-    return this.http.get(`${this.url}/order/${orderId}`)
-  }
-
-  removeOrderItem(removeData: any): Observable<any> {
-    return this.http.post(`${this.url}/order/remove/item`, removeData)
-  }
+  // PromoCode
 
   checkPromocode(code: string, orderId: string): Observable<any> {
     return this.http.post(`${this.url}/promocode/check`, {

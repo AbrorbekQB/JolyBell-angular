@@ -5,11 +5,11 @@ import {NotificationService} from "../../shared/services/notification.service";
 import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
-  selector: 'app-orders-checkout',
-  templateUrl: './orders-checkout.component.html',
-  styleUrls: ['./orders-checkout.component.scss']
+  selector: 'app-booking',
+  templateUrl: './booking.component.html',
+  styleUrls: ['./booking.component.scss']
 })
-export class OrdersCheckoutComponent implements OnInit {
+export class BookingComponent implements OnInit {
   // @ts-ignore
   public orderId: string = localStorage.getItem("cartId")
   public orderDetails: any = {
@@ -54,5 +54,9 @@ export class OrdersCheckoutComponent implements OnInit {
       }, error => {
         this.notifyService.showError(`Not found Promocode`)
       })
+  }
+
+  checkout() {
+    this.router.navigate(['/booking/choice-payment'])
   }
 }

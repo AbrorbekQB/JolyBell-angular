@@ -1,0 +1,142 @@
+.promocode__form {
+  width: 500px;
+  margin: 0 auto;
+  position: relative;
+
+  label {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      margin-bottom: 9px;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.6;
+      text-transform: uppercase;
+      color: #818d92;
+    }
+  }
+
+  button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  input {
+    border-radius: 30px;
+    height: 40px;
+    padding: 0 30px 0 20px;
+    border: none;
+    background-color: #F4F6F8;
+    font-size: 22px;
+  }
+}
+
+.page--section {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.proceed__wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.details__form {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.order__wrapper {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+h2 {
+  margin-bottom: 30px;
+  font-weight: normal;
+}
+
+.order__list {
+  background-color: #F4F6F8;
+  border-radius: 30px;
+}
+
+.order__item {
+  padding: 30px;
+  border-bottom: 1px solid #e0e3e6;
+}
+
+.order__item__footer {
+  padding: 30px;
+}
+
+.order__item__name {
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 500;
+
+}
+
+.order__item__title {
+  display: block;
+  font-size: 16px;
+  line-height: 1.2;
+  color: #818d92;
+
+  span {
+    font-size: 16px;
+    font-weight: 500 !important;
+    color: black !important;
+  }
+}
+
+.order__item__cost {
+  display: block;
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.order__item__footer .order__item__title {
+  margin-bottom: 10px;
+}
+
+.black-white__btn {
+  width: 300px;
+}
+
+.order__wrapper--totalAmount {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: 700;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e8ebee;
+}
+
+.payment__item {
+  width: 120px;
+  height: 120px;
+  background-color: #F4F6F8;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 15px;
+
+  &:hover {
+    background-color: #cacbd0;
+  }
+
+  img {
+    width: 80%;
+    height: auto;
+  }
+}

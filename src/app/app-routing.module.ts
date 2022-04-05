@@ -7,7 +7,8 @@ import {ProductComponent} from './pages/product/product.component';
 import {OrderComponent} from "./pages/order/order.component";
 import {AccountComponent} from "./pages/account/account.component";
 import {PurchaseComponent} from "./pages/purchase/purchase.component";
-import {OrdersCheckoutComponent} from "./pages/orders-checkout/orders-checkout.component";
+import {BookingComponent} from "./pages/booking/booking.component";
+import {ChoisePaymentComponent} from "./pages/choise-payment/choise-payment.component";
 
 const routes: Routes = [{
   path: '',
@@ -31,8 +32,11 @@ const routes: Routes = [{
   path: 'purchase',
   component: PurchaseComponent
 }, {
-  path: 'orders/checkout',
-  component: OrdersCheckoutComponent
+  path: 'booking/details',
+  component: BookingComponent
+}, {
+  path: 'booking/choice-payment',
+  component: ChoisePaymentComponent
 }, {
   path: 'admin',
   loadChildren: () => import('./admin/admin.module').then(module => module.AdminModule),
