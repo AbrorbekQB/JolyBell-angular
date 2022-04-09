@@ -95,4 +95,14 @@ export class ApiService {
     })
 
   }
+
+  // for Admin
+  // user
+  getAllUser(): Observable<any> {
+    return this.http.post(`${this.url}/admin/user/list`, {
+      "draw": 1,
+      "page": 0,
+      "length": 10,
+    })
+  }
 }

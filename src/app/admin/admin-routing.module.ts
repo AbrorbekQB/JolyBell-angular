@@ -1,8 +1,10 @@
 import {RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
 import {AdminComponent} from "./admin/admin.component";
-import {AdminLoginComponent} from "./admin-login/admin-login.component";
-import {DashboardComponent} from "./dashboard/dashboard.component";
+import {AdminLoginComponent} from "./pages/admin-login/admin-login.component";
+import {DashboardComponent} from "./pages/dashboard/dashboard.component";
+import {OrdersComponent} from "./pages/orders/orders.component";
+import {UsersComponent} from "./pages/users/users.component";
 
 const routes: Routes = [
   {
@@ -16,6 +18,14 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent
+      },
+      {
+        path: 'orders',
+        component: OrdersComponent
+      },
+      {
+        path: 'users',
+        component: UsersComponent
       }
     ]
   }

@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {ApiService} from "../../shared/services/api.service";
 import {Router} from "@angular/router";
-import {CartService} from "../../shared/services/cart.service";
 import {NotificationService} from "../../shared/services/notification.service";
 
 @Component({

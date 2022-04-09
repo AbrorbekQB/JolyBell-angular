@@ -1,0 +1,94 @@
+.section__wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 60px;
+  width: 100%;
+}
+
+.section--left {
+  width: 220px;
+  min-height: calc(100vh - 60px);
+  background-color: #fff;
+}
+
+.section--right {
+  width: calc(100% - 220px);
+}
+
+.container {
+  padding: 0;
+  background-color: #F5F7FF;
+}
+
+.filter__wrapper {
+  width: calc(100% - 20px);
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  margin: 10px;
+}
+
+.search__form {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 20px;
+  width: 100%;
+  margin-right: 20px;
+}
+
+.filter__item {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.filter__dropdown {
+  width: 120px;
+}
+
+.order__content {
+  background-color: #fff;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+td, th {
+  text-align: left;
+  padding: 5px;
+  border: 1px solid rgba(121, 119, 119, 0.49);
+}
+
+.table__wrapper {
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    height: 8px;
+    width: 12px; /* width of the entire scrollbar */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(146, 172, 199, 0.63); /* color of the tracking area */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #8d8dab; /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    border: 1px solid rgba(146, 172, 199, 0.63); /* creates padding around scroll thumb */
+  }
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.order__table {
+  min-width: 100%;
+  border-radius: 5px;
+}
+
+

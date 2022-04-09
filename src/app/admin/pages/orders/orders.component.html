@@ -1,0 +1,158 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="section__wrapper">
+    <div class="section--left">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="section--right">
+      <div class="order_wrapper">
+        <div class="filter__wrapper">
+          <form class="filter__form">
+            <div class="filter__item">
+              <label>From</label>
+              <input class="input--admin" type="date">
+            </div>
+            <div class="filter__item">
+              <label>To</label>
+              <input class="input--admin" type="date">
+            </div>
+            <div class="filter__item">
+              <label>Status</label>
+              <select class="input--admin filter__dropdown">
+                <option value="paid" selected>Paid</option>
+                <option value="checkout">Checkout</option>
+              </select>
+            </div>
+            <div class="filter__item">
+              <label>State</label>
+              <select class="input--admin filter__dropdown">
+                <option value="paid" selected>Paid</option>
+                <option value="accept">Accept</option>
+              </select>
+            </div>
+            <div class="filter__item">
+              <label>Province</label>
+              <select class="input--admin filter__dropdown">
+                <option value="paid" selected>Tashkent</option>
+                <option value="checkout">Checkout</option>
+              </select>
+            </div>
+            <button class="info-btn--admin" type="submit">Filter</button>
+          </form>
+          <form class="search__form">
+            <div class="filter__item">
+              <label>Search</label>
+              <input class="input--admin" type="text">
+            </div>
+          </form>
+        </div>
+
+        <div class="order__content">
+          <div class="table__wrapper">
+            <table class="order__table">
+              <thead>
+              <tr>
+                <th>OrderId</th>
+                <th>Products</th>
+                <th>Created Date</th>
+                <th>Status</th>
+                <th>State</th>
+                <th>Province</th>
+                <th>Cost</th>
+                <th>Next state</th>
+                <th>Cancel</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Info</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>a5b8d3b2-bc29-400d-8261-e47df2e337b1</td>
+                <td>
+                  <table class="product__table">
+                    <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Size</th>
+                      <th>Count</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>Ko'ylak</td>
+                      <td>S</td>
+                      <td>5</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </td>
+                <td>
+                  09.04.2022 12:58
+                </td>
+                <td>
+                  PAID
+                </td>
+                <td>
+                  PAID
+                </td>
+                <td>
+                  TASHKENT
+                </td>
+                <td>
+                  30 $
+                </td>
+                <td>
+                  <button class="btn success__btn">ACCEPT</button>
+                </td>
+                <td>
+                  <button class="btn cancel__btn">CANCEL</button>
+                </td>
+                <td>
+                  abrorbekgreen497@gmail.com
+                </td>
+                <td>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus nesciunt provident quo suscipit
+                  vero.
+                  Ad alias distinctio minus modi nam nesciunt possimus recusandae suscipit. Atque illum nemo pariatur
+                  quam
+                  voluptas?
+                </td>
+                <td>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi illum maxime quas! Asperiores
+                  consequuntur doloremque doloribus esse fugiat, id illum minima nobis, quasi repudiandae sit temporibus
+                  totam, voluptatum? Commodi, excepturi.
+                </td>
+              </tr>
+              <tr>
+                <td>Messsy</td>
+                <td>Flash</td>
+                <td class="text-danger"> 21.06% <i class="ti-arrow-down"></i></td>
+                <td><label class="badge badge-warning">In progress</label></td>
+              </tr>
+              <tr>
+                <td>John</td>
+                <td>Premier</td>
+                <td class="text-danger"> 35.00% <i class="ti-arrow-down"></i></td>
+                <td><label class="badge badge-info">Fixed</label></td>
+              </tr>
+              <tr>
+                <td>Peter</td>
+                <td>After effects</td>
+                <td class="text-success"> 82.00% <i class="ti-arrow-up"></i></td>
+                <td><label class="badge badge-success">Completed</label></td>
+              </tr>
+              <tr>
+                <td>Dave</td>
+                <td>53275535</td>
+                <td class="text-success"> 98.05% <i class="ti-arrow-up"></i></td>
+                <td><label class="badge badge-warning">In progress</label></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
