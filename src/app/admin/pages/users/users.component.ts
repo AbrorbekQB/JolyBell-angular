@@ -12,9 +12,10 @@ export class UsersComponent implements OnInit {
     data: []
   }
 
+  public activeRoute: string = ""
+
   constructor(private route: ActivatedRoute,
-              private apiService: ApiService,
-              private router: Router) {
+              private apiService: ApiService) {
   }
 
   ngOnInit(): void {
@@ -24,4 +25,10 @@ export class UsersComponent implements OnInit {
     })
   }
 
+  changeRoute(activeRoute: string) {
+    this.activeRoute = activeRoute;
+    this.apiService.getAllUser().subscribe(res => {
+      this.userList = res
+    })
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,10 +6,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+  @Input() count: number = 0;
 
-  constructor() { }
+  @Output() changeRoute: EventEmitter<any> = new EventEmitter();
+
+
+  @Input() activeRoute: string = "";
+
+  constructor() {
+  }
 
   ngOnInit(): void {
+  }
+
+  changeActiveRoute(route: string) {
+    this.changeRoute.emit(route)
+    this.activeRoute = route;
   }
 
 }

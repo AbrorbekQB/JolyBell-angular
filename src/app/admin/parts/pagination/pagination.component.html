@@ -1,0 +1,46 @@
+<div class="pagination__wrapper">
+  <ul class="pagination__list">
+    <li class="pagination__item pagination__prev" *ngIf="page!=1">
+      <span><</span>
+    </li>
+    <li class="pagination__item pagination__prev--disable" *ngIf="page==1">
+      <span><</span>
+    </li>
+    <li class="pagination__item pagination__number">
+      <span>2</span>
+    </li>
+    <!--    <li class="pagination__item">-->
+    <!--      <span>...</span>-->
+    <!--    </li>-->
+    <li class="pagination__item pagination__number">
+      <span>7</span>
+    </li>
+    <li class="pagination__item pagination__number">
+      <span>8</span>
+    </li>
+    <li class="pagination__item pagination__number">
+      <span>9</span>
+    </li>
+    <!--    <li class="pagination__item">-->
+    <!--      <span>...</span>-->
+    <!--    </li>-->
+    <li class="pagination__item pagination__number">
+      <span>19</span>
+    </li>
+    <li class="pagination__item pagination__number">
+      <span>20</span>
+    </li>
+    <li class="pagination__item pagination__next"
+        *ngIf="page!=pageCount">
+      <span>></span>
+    </li>
+    <li class="pagination__item pagination__next--disable"
+        *ngIf="page==pageCount">
+      <span>></span>
+    </li>
+  </ul>
+</div>
+
+<pagination-controls>
+
+</pagination-controls>

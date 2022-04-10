@@ -1,0 +1,29 @@
+.create-user__form {
+  //display: flex;
+  //justify-content: space-around;
+  //align-items: flex-start;
+  text-align: right;
+}
+
+.create-user__form--left,
+.create-user__form--right {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form__item {
+  display: flex;
+  flex-direction: column;
+}
+
+.input--admin {
+  width: 300px;
+}
+
+.create__btn {
+  width: 300px;
+  font-size: 16px;
+  font-weight: 500;
+}

@@ -1,0 +1,38 @@
+<form [formGroup]="createUserForm" (submit)="createUser()" class="create-user__form">
+  <div class="create-user__form--left">
+    <div class="form__item">
+      <label>Firstname</label>
+      <input class="input--admin" type="text"
+             formControlName="firstname">
+    </div>
+    <div class="form__item">
+      <label>Lastname</label>
+      <input class="input--admin" type="text"
+             formControlName="lastname">
+    </div>
+    <div class="form__item">
+      <label>Patronymic</label>
+      <input class="input--admin" type="text"
+             formControlName="patronymic">
+    </div>
+  </div>
+
+  <div class="create-user__form--right">
+    <div class="form__item">
+      <label>Email</label>
+      <input class="input--admin" type="email"
+             formControlName="username">
+    </div>
+    <div class="form__item">
+      <label>Phone Number</label>
+      <input class="input--admin" type="text"
+             formControlName="phoneNumber">
+    </div>
+    <div class="form__item">
+      <label>Password</label>
+      <input class="input--admin" type="password"
+             formControlName="password">
+    </div>
+  </div>
+  <button class="btn success__btn create__btn" type="submit">Create Admin</button>
+</form>

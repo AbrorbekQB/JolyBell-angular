@@ -719,7 +719,7 @@ button.toast-close-button {
   background-color: #fff;
   color: #248AFD;
 
-  &:hover{
+  &:hover {
     background-color: #248AFD;
     color: #fff;
   }
@@ -738,19 +738,24 @@ button.toast-close-button {
 }
 
 .success__btn {
-  color: #57B657;
+  color: #fff;
   border: 1px solid #57B657;
+  background-color: #57B657;
 
   &:hover {
-    background-color: #57B657;
+    color: #57B657;
+    background-color: #fff;
   }
 }
 
 .cancel__btn {
-  color: #FF4747;
+  background-color: #FF4747;
   border: 1px solid #FF4747;
+  color: #fff;
 
   &:hover {
-    background-color: #FF4747;
+    color: #FF4747;
+    border: 1px solid #FF4747;
+    background-color: #fff;
   }
 }

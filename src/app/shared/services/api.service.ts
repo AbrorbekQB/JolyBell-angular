@@ -105,4 +105,15 @@ export class ApiService {
       "length": 10,
     })
   }
+
+  createAdminUser(data: any): Observable<any> {
+    return this.http.post(`${this.url}/admin/user/create`, {
+      firstname: data.firstname,
+      lastname: data.lastname,
+      patronymic : data.patronymic,
+      username: data.username,
+      password: data.password,
+      phoneNumber: data.phoneNumber
+    })
+  }
 }

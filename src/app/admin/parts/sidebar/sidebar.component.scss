@@ -42,10 +42,38 @@
   }
 }
 
+.inner__menu__list {
+  margin-left: 30px;
+  display: none;
+  transition: all 1s ease;
+}
+
+.inner__menu__item {
+  color: #6C7383;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  border: 1px solid #1e1ba369;
+  list-style-type: circle !important;
+
+  &:hover {
+    background-color: #1e1ba369;
+
+    p {
+      color: #fff;
+    }
+  }
+}
+
 .menu--active {
-  background-color: #1e1ba369;;
+  background-color: #1e1ba369;
 
   p {
     color: #fff;
   }
+}
+
+.menu__item--user.menu--active ~ .users__menu__list {
+  display: block;
 }

@@ -22,6 +22,7 @@ import { CarouselComponent } from './parts/carousel/carousel.component';
 import { PurchaseComponent } from './pages/purchase/purchase.component';
 import {BookingComponent} from "./pages/booking/booking.component";
 import { ChoisePaymentComponent } from './pages/choise-payment/choise-payment.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { ChoisePaymentComponent } from './pages/choise-payment/choise-payment.co
     ChoisePaymentComponent
   ],
   imports: [
+    NgxPaginationModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,

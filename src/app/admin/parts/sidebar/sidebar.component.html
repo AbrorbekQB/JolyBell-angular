@@ -10,10 +10,24 @@
       <p class="menu__item--title">Orders</p>
     </li>
 
-    <li class="menu__item" routerLink="/admin/users" routerLinkActive="menu--active">
+    <li class="menu__item menu__item--user" routerLink="/admin/users" routerLinkActive="menu--active"
+        (click)="changeActiveRoute('userList')">
       <img src="assets/img/admin/dashboard.png">
       <p class="menu__item--title">Users</p>
     </li>
+
+    <ul class="inner__menu__list users__menu__list">
+      <li class="inner__menu__item users__menu__item"
+          [class.menu--active]="activeRoute==='userList' || activeRoute===''"
+          (click)="changeActiveRoute('userList')">
+        <p>List</p>
+      </li>
+      <li class="inner__menu__item users__menu__item"
+          [class.menu--active]="activeRoute==='userCreate'"
+          (click)="changeActiveRoute('userCreate')">
+        <p>Create</p>
+      </li>
+    </ul>
 
     <li class="menu__item" routerLinkActive="menu--active">
       <img src="assets/img/admin/dashboard.png">
