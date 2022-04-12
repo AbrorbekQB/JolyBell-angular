@@ -5,6 +5,8 @@ import {AdminLoginComponent} from "./pages/admin-login/admin-login.component";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {OrdersComponent} from "./pages/orders/orders.component";
 import {UsersComponent} from "./pages/users/users.component";
+import {ProductComponent} from "./pages/product/product.component";
+import {CategoryComponent} from "./pages/category/category.component";
 
 const routes: Routes = [
   {
@@ -26,6 +28,14 @@ const routes: Routes = [
       {
         path: 'users',
         component: UsersComponent
+      },
+      {
+        path: 'product',
+        component: ProductComponent
+      },
+      {
+        path: "category",
+        component: CategoryComponent
       }
     ]
   }

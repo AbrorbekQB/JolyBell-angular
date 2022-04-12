@@ -1,0 +1,100 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="section__wrapper">
+    <div class="section--left">
+      <app-sidebar (changeRoute)="changeRoute($event)"
+                   [activeRoute]="activeRoute"></app-sidebar>
+    </div>
+    <div class="section--right">
+      <div class="order_wrapper">
+        <div class="filter__wrapper">
+          <button class="btn success__btn create-category__btn" (click)="openCreateCategoryModal()">Create category
+          </button>
+          <div class="admin__modal" *ngIf="createCategoryModal">
+            <div class="black-curtain" *ngIf="createCategoryModal" (click)="closeModal()"></div>
+            <div class="admin__content">
+              <div class="close__btn" (click)="closeModal()">
+                <div class="inside"></div>
+              </div>
+              <h2 class="admin__header">Create Category</h2>
+              <form [formGroup]="createCategoryForm" class="admin__form" (submit)="createCategory()">
+                <label>Name</label>
+                <input class="input--admin" type="text"
+                       formControlName="name">
+                <button type="submit" class="btn success__btn">Create</button>
+              </form>
+            </div>
+          </div>
+          <form class="search__form" [formGroup]="searchCategoryFrom">
+            <div class="filter__item">
+              <label>Search</label>
+              <input class="input--admin" type="text" formControlName="search" (keyup)="searching()">
+            </div>
+          </form>
+        </div>
+
+        <div class="order__content">
+          <div class="table__wrapper">
+            <table class="order__table">
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Active</th>
+                <th>Created Date</th>
+                <th>Username</th>
+                <th>Edit</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let category of categoryList">
+                <td> {{category.name}}</td>
+                <td>
+                  <input type="checkbox" [checked]="category.active"
+                         (click)="openChangeActiveCategoryModal(category.id)">
+                </td>
+                <td> {{category.createDate}}</td>
+                <td> {{category.username}}</td>
+                <td>
+                  <button class="btn edit__btn" (click)="openEditCategoryModal(category.id)">
+                    <img src="assets/img/edit.svg">
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <!--<app-pagination></app-pagination>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="admin__modal" *ngIf="changeActiveCategoryModal || editCategoryModal">
+  <div class="black-curtain" *ngIf="changeActiveCategoryModal"
+       (click)="closeModal();updateCategoryTable('')"></div>
+  <div class="admin__content" *ngIf="changeActiveCategoryModal">
+    <div class="close__btn" (click)="closeModal();updateCategoryTable('')">
+      <div class="inside"></div>
+    </div>
+    <h2 class="admin__header">Are you sure?</h2>
+    <form class="admin__form change-active-category">
+      <button class="btn success__btn" type="button" (click)="changeActiveCategory(categoryId)">Update</button>
+      <button class="btn cancel__btn" type="button" (click)="closeModal();updateCategoryTable('')">Cancel</button>
+    </form>
+  </div>
+
+  <div class="black-curtain" *ngIf="editCategoryModal"
+       (click)="closeModal()"></div>
+  <div class="admin__content" *ngIf="editCategoryModal">
+    <div class="close__btn" (click)="closeModal()">
+      <div class="inside"></div>
+    </div>
+    <h2 class="admin__header">Edit</h2>
+    <form [formGroup]="editCategoryForm" class="admin__form" (submit)="editCategory(categoryId)">
+      <label>Name</label>
+      <input class="input--admin" type="text"
+             formControlName="name" [value]="categoryName">
+      <button class="btn success__btn" type="submit">Edit</button>
+    </form>
+  </div>
+</div>

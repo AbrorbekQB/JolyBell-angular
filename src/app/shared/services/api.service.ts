@@ -81,6 +81,10 @@ export class ApiService {
     return this.http.get(this.url + '/category/list')
   }
 
+  getCategoryById(id: string): Observable<any> {
+    return this.http.get(`${this.url}/category/get/${id}`)
+  }
+
   // user
   getUserDetails(): Observable<any> {
     return this.http.get(`${this.url}/user/get`)
@@ -110,10 +114,36 @@ export class ApiService {
     return this.http.post(`${this.url}/admin/user/create`, {
       firstname: data.firstname,
       lastname: data.lastname,
-      patronymic : data.patronymic,
+      patronymic: data.patronymic,
       username: data.username,
       password: data.password,
       phoneNumber: data.phoneNumber
+    })
+  }
+
+  // category
+  getCategoryListByAdmin(search: string): Observable<any> {
+    return this.http.post(this.url + '/admin/category/list',{
+      "filterData": {
+        "search": search
+      }
+    })
+  }
+
+  changeActiveCategory(id: string) {
+    return this.http.get(`${this.url}/admin/category/change/active/${id}`)
+  }
+
+  updateCategoryByAdmin(id: string, name: string) {
+    return this.http.post(`${this.url}/admin/category/edit`, {
+      "id": id,
+      "name": name
+    })
+  }
+
+  createCategoryByAdmin(name: string) {
+    return this.http.post(`${this.url}/admin/category/create`, {
+      "name": name
     })
   }
 }

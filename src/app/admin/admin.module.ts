@@ -13,6 +13,8 @@ import {UserCreateComponent} from './parts/user-create/user-create.component';
 import {PaginationComponent} from './parts/pagination/pagination.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import {ReactiveFormsModule} from "@angular/forms";
+import { ProductComponent } from './pages/product/product.component';
+import { CategoryComponent } from './pages/category/category.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import {ReactiveFormsModule} from "@angular/forms";
     UsersComponent,
     UserListComponent,
     UserCreateComponent,
-    PaginationComponent
+    PaginationComponent,
+    ProductComponent,
+    CategoryComponent
   ],
   imports: [
     NgxPaginationModule,

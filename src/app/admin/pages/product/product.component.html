@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="section__wrapper">
+    <div class="section--left">
+      <app-sidebar (changeRoute)="changeRoute($event)"
+                   [activeRoute] = "activeRoute"></app-sidebar>
+    </div>
+    <div class="section--right">
+      <div class="order_wrapper">
+        <div class="filter__wrapper" *ngIf="activeRoute=='userList' || activeRoute==''">
+          <form class="search__form">
+            <div class="filter__item">
+              <label>Search</label>
+              <input class="input--admin" type="text">
+            </div>
+          </form>
+        </div>
+
+        <div class="order__content">
+          <app-user-list *ngIf="activeRoute=='userList' || activeRoute==''" [userData]=userList.data></app-user-list>
+          <app-user-create *ngIf="activeRoute=='userCreate'"
+                           (changeRoute)="changeRoute($event)">
+          </app-user-create>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
