@@ -15,7 +15,6 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ProductComponent} from './pages/product/product.component';
 import {CategoryComponent} from './pages/category/category.component';
-import {AppModule} from "../app.module";
 import { CarouselAdminComponent } from './parts/carousel-admin/carousel-admin.component';
 
 @NgModule({

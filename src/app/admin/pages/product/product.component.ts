@@ -25,6 +25,10 @@ export class ProductComponent implements OnInit {
   public images: any[] = []
   public componentState: string = ""
   public addProductCountId: string = ""
+  public totalLength: any
+  public page: number = 1
+  public productId: string = "";
+  public productDetails: any = []
 
   public createProductForm = new FormGroup({
     images: new FormControl(''),
@@ -34,6 +38,10 @@ export class ProductComponent implements OnInit {
     advice: new FormControl(''),
     description: new FormControl([]),
     withSize: new FormControl(true)
+  })
+
+  public searchCategoryFrom = new FormGroup({
+    search: new FormControl('')
   })
 
   public addProductForm = new FormGroup({
@@ -47,7 +55,7 @@ export class ProductComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.updateProductList()
+    this.updateProductList(this.searchCategoryFrom.value.search)
   }
 
   openCreateProductModal() {
@@ -70,12 +78,26 @@ export class ProductComponent implements OnInit {
         })
         break
       }
+      case 'changeActive': {
+        this.productId = arg
+        document.body.style.overflow = 'hidden'
+        break
+      }
+      case 'editProduct': {
+        this.productId = arg
+        document.body.style.overflow = 'hidden'
+        this.apiService.getProductById(arg).subscribe(res => {
+          console.log(res)
+        });
+        break
+      }
     }
   }
 
   closeModal() {
     this.componentState = ""
     this.addProductCountId = ""
+    document.body.style.overflow = ''
   }
 
   onFileChange(event: any) {
@@ -101,27 +123,50 @@ export class ProductComponent implements OnInit {
         this.closeModal()
         this.createProductForm.reset()
         this.images = []
-        this.updateProductList()
+        this.updateProductList(this.searchCategoryFrom.value.search)
       });
     }, error => {
       this.notifyService.showError("Creation error!")
     })
   }
 
-  updateProductList() {
-    this.apiService.getAllProductList().subscribe(res => {
-      this.productList = res
+  updateProductList(search: string) {
+    this.apiService.getAllProductList(search, this.page).subscribe(res => {
+      this.productList = res.data
+      this.totalLength = res.totalCount
     })
   }
 
   addToProductCount() {
     this.apiService.addToProductCount(this.addProductCountId, this.addProductForm.value.count).subscribe(res => {
       this.notifyService.showSuccess("Successfully added!")
-      this.updateProductList()
+      this.updateProductList(this.searchCategoryFrom.value.search)
       this.closeModal()
       this.addProductForm.reset()
     }, error => {
       this.notifyService.showError("adding error!")
+    })
+  }
+
+  searching() {
+    if (this.searchCategoryFrom.value.search.length >= 3)
+      this.updateProductList(this.searchCategoryFrom.value.search)
+    else {
+      this.updateProductList("")
+    }
+  }
+
+  fillList() {
+    this.updateProductList(this.searchCategoryFrom.value.search)
+  }
+
+  changeActiveProduct(productId: string) {
+    this.apiService.changeActiveProduct(productId).subscribe(res => {
+      this.notifyService.showSuccess("Successfully updated!");
+      this.closeModal()
+      this.updateProductList("")
+    }, error => {
+      this.notifyService.showError("Can not update");
     })
   }
 }

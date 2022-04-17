@@ -122,8 +122,9 @@ export class ApiService {
   }
 
   // category
-  getCategoryListByAdmin(search: string): Observable<any> {
+  getCategoryListByAdmin(search: string, page: number): Observable<any> {
     return this.http.post(this.url + '/admin/category/list', {
+      "page": page,
       "filterData": {
         "search": search
       }
@@ -167,8 +168,13 @@ export class ApiService {
     return this.http.post(`${this.url}/admin/product/update/image/${productId}`, images)
   }
 
-  getAllProductList(): Observable<any> {
-    return this.http.get(`${this.url}/admin/product/list`)
+  getAllProductList(search: string, page: number): Observable<any> {
+    return this.http.post(`${this.url}/admin/product/list`, {
+      "page": page,
+      "filterData": {
+        "search": search
+      }
+    })
   }
 
   addToProductCount(id: string, count: number): Observable<any> {
@@ -176,5 +182,13 @@ export class ApiService {
       "id": id,
       "count": count
     })
+  }
+
+  changeActiveProduct(productId: string) {
+    return this.http.get(`${this.url}/admin/product/change/active/${productId}`)
+  }
+
+  getProductById(id: string): Observable<any> {
+    return this.http.get(`${this.url}/admin/product/get/${id}`)
   }
 }

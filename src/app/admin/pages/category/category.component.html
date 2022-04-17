@@ -46,7 +46,11 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let category of categoryList">
+              <tr *ngFor="let category of categoryList | paginate: {
+              itemsPerPage: 10,
+              currentPage: page,
+              totalItems: totalLength
+              }">
                 <td> {{category.name}}</td>
                 <td>
                   <input type="checkbox" [checked]="category.active"
@@ -63,7 +67,7 @@
               </tbody>
             </table>
           </div>
-          <!--<app-pagination></app-pagination>-->
+          <pagination-controls class="pagination-controls" (pageChange)="page = $event; fillList()"></pagination-controls>
         </div>
       </div>
     </div>

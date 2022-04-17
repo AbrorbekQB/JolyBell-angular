@@ -23,6 +23,8 @@ export class CategoryComponent implements OnInit {
     createDate: "",
     username: ""
   }]
+  public totalLength: any
+  page: number = 1
 
   public editCategoryForm = new FormGroup({
     name: new FormControl(this.categoryName)
@@ -48,8 +50,9 @@ export class CategoryComponent implements OnInit {
   }
 
   updateCategoryTable(search: string) {
-    this.apiService.getCategoryListByAdmin(search).subscribe(res => {
-      this.categoryList = res
+    this.apiService.getCategoryListByAdmin(search, this.page).subscribe(res => {
+      this.categoryList = res.data
+      this.totalLength = res.totalCount
     })
   }
 
@@ -131,5 +134,9 @@ export class CategoryComponent implements OnInit {
     else {
       this.updateCategoryTable("")
     }
+  }
+
+  fillList() {
+    this.updateCategoryTable(this.searchCategoryFrom.value.search)
   }
 }

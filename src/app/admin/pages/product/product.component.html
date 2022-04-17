@@ -8,10 +8,10 @@
       <div class="order_wrapper">
         <div class="filter__wrapper">
           <button class="btn success__btn" (click)="openModal('create','')">Create Product</button>
-          <form class="search__form">
+          <form class="search__form" [formGroup]="searchCategoryFrom">
             <div class="filter__item">
               <label>Search</label>
-              <input class="input--admin" type="text">
+              <input class="input--admin" type="text" formControlName="search" (keyup)="searching()">
             </div>
           </form>
         </div>
@@ -25,15 +25,21 @@
                 <th>Name</th>
                 <th>Size</th>
                 <th>Count</th>
+                <th>Active</th>
                 <th>Description</th>
                 <th>Category</th>
                 <th>Cost</th>
                 <th>Created Date</th>
                 <th>Advice</th>
+                <th>Edit</th>
               </tr>
               </thead>
               <tbody *ngIf="productList.length">
-              <tr *ngFor="let product of productList" class="table__tbody">
+              <tr *ngFor="let product of productList| paginate: {
+              itemsPerPage: 10,
+              currentPage: page,
+              totalItems: totalLength
+              }" class="table__tbody">
                 <td style="max-width: 160px; max-height: 160px">
                   <app-carousel-admin [images]="product.imageItems"></app-carousel-admin>
                 </td>
@@ -64,6 +70,8 @@
                 <td>
                   {{product.count}}
                 </td>
+                <td><input type="checkbox" [checked]="product.active"
+                           (click)="openModal('changeActive',product.id)"></td>
                 <td>
                   <ng-container *ngIf="product.descriptionItems">
                     <p *ngFor="let text of product.descriptionItems">
@@ -83,11 +91,17 @@
                 <td>
                   {{product.advice}}
                 </td>
+                <td>
+                  <button class="btn edit__btn" (click)="openModal('editProduct',product.id)">
+                    <img src="assets/img/edit.svg">
+                  </button>
+                </td>
               </tr>
               </tbody>
             </table>
           </div>
-
+          <pagination-controls class="pagination-controls"
+                               (pageChange)="page = $event; fillList()"></pagination-controls>
         </div>
       </div>
     </div>
@@ -96,11 +110,11 @@
 
 <div class="admin__modal" *ngIf="componentState">
   <div class="black-curtain" (click)="closeModal()"></div>
-  <div class="admin__content add-product__content">
+  <div class="admin__content" *ngIf="componentState=='create'">
     <div class="close__btn" (click)="closeModal()">
       <div class="inside"></div>
     </div>
-    <h2 class="admin__header" *ngIf="componentState=='create'">Create Product</h2>
+    <h2 class="admin__header">Create Product</h2>
     <form class="admin__form" *ngIf="componentState=='create'" [formGroup]="createProductForm">
       <div class="admin__form--item__wrapper">
         <div class="admin__form--item">
@@ -158,13 +172,36 @@
         </button>
       </div>
     </form>
-
-    <h2 class="admin__header" *ngIf="componentState=='addToProductCount'">In Come product</h2>
+  </div>
+  <div class="admin__content add-product__content" *ngIf="componentState=='addToProductCount'">
+    <div class="close__btn" (click)="closeModal()">
+      <div class="inside"></div>
+    </div>
+    <h2 class="admin__header">In Come product</h2>
     <form class="admin__form add-product__form" [formGroup]="addProductForm">
       <label>Count</label>
       <input class="input--admin" type="number"
              formControlName="count">
       <button class="btn success__btn" (click)="addToProductCount()">Add</button>
+    </form>
+  </div>
+  <div class="admin__content change-active__content" *ngIf="componentState=='changeActive'">
+    <div class="close__btn" (click)="closeModal()">
+      <div class="inside"></div>
+    </div>
+    <h2 class="admin__header">Are you sure?</h2>
+    <form class="admin__form change-active-product">
+      <button class="btn success__btn" type="button" (click)="changeActiveProduct(productId)">Update</button>
+      <button class="btn cancel__btn" type="button" (click)="closeModal();updateProductList('')">Cancel</button>
+    </form>
+  </div>
+  <div class="admin__content edit-product__content" *ngIf="componentState=='editProduct'">
+    <div class="close__btn" (click)="closeModal()">
+      <div class="inside"></div>
+    </div>
+    <h2 class="admin__header">Edit Product</h2>
+    <form class="admin__form edit-product">
+
     </form>
   </div>
 </div>
