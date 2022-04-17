@@ -29,6 +29,7 @@
   align-items: center;
   background-color: #fff;
   margin: 10px;
+  padding: 0 20px;
 }
 
 .search__form {
@@ -55,4 +56,96 @@
   margin: 10px;
   padding: 20px;
   border-radius: 5px;
+}
+
+.table__tbody td {
+  vertical-align: middle;
+}
+
+// create product modal begin
+.close__btn {
+  top: 8px;
+  right: 8px;
+}
+
+.admin__content {
+  width: 600px;
+}
+
+.admin__form--item__wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.admin__form--item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+
+  &:nth-child(1),
+  &:nth-child(2) {
+    width: 45%;
+  }
+}
+
+textarea {
+  padding: 10px;
+  font-size: 16px;
+  height: 100px;
+}
+
+.create__btn {
+  width: 160px;
+  font-size: 18px;
+}
+
+.with-save__input {
+  margin-left: 150px;
+
+  input {
+    margin-left: 20px;
+  }
+}
+
+.images-file__input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.images-file__input + label {
+  display: block;
+  font-size: 18px;
+  font-weight: 500;
+  color: white;
+  background-color: #57B657;
+  border: 1px solid #57B657;
+}
+
+.images-file__input:focus + label,
+.images-file__input + label:hover {
+  background-color: #fff;
+  color: #57B657;
+}
+
+// create product modal end
+
+.add-product__content {
+  width: 200px;
+}
+
+.add-product__form {
+  display: flex;
+  flex-direction: column;
+
+  input {
+    margin-bottom: 20px;
+  }
+}
+
+.product__table{
+  margin: 0;
 }

@@ -123,7 +123,7 @@ export class ApiService {
 
   // category
   getCategoryListByAdmin(search: string): Observable<any> {
-    return this.http.post(this.url + '/admin/category/list',{
+    return this.http.post(this.url + '/admin/category/list', {
       "filterData": {
         "search": search
       }
@@ -144,6 +144,37 @@ export class ApiService {
   createCategoryByAdmin(name: string) {
     return this.http.post(`${this.url}/admin/category/create`, {
       "name": name
+    })
+  }
+
+  // Product
+  createProductByAdmin(data: any) {
+    return this.http.post(`${this.url}/admin/product/create`,
+      {
+        "name": data.name,
+        "cost": data.cost,
+        "imagesItems": data.images,
+        "descriptionItems": data.description,
+        "count": data.count,
+        "advice": data.advice,
+        "categoryId": data.categoryId,
+        "withSize": data.withSize
+      },
+      {responseType: 'text'})
+  }
+
+  updateProductImage(images: FormData, productId: string): Observable<any> {
+    return this.http.post(`${this.url}/admin/product/update/image/${productId}`, images)
+  }
+
+  getAllProductList(): Observable<any> {
+    return this.http.get(`${this.url}/admin/product/list`)
+  }
+
+  addToProductCount(id: string, count: number): Observable<any> {
+    return this.http.post(`${this.url}/admin/product/add`, {
+      "id": id,
+      "count": count
     })
   }
 }

@@ -2,12 +2,12 @@
 <div class="container">
   <div class="section__wrapper">
     <div class="section--left">
-      <app-sidebar (changeRoute)="changeRoute($event)"
-                   [activeRoute] = "activeRoute"></app-sidebar>
+      <app-sidebar></app-sidebar>
     </div>
     <div class="section--right">
       <div class="order_wrapper">
-        <div class="filter__wrapper" *ngIf="activeRoute=='userList' || activeRoute==''">
+        <div class="filter__wrapper">
+          <button class="btn success__btn" (click)="openModal('create','')">Create Product</button>
           <form class="search__form">
             <div class="filter__item">
               <label>Search</label>
@@ -17,12 +17,154 @@
         </div>
 
         <div class="order__content">
-          <app-user-list *ngIf="activeRoute=='userList' || activeRoute==''" [userData]=userList.data></app-user-list>
-          <app-user-create *ngIf="activeRoute=='userCreate'"
-                           (changeRoute)="changeRoute($event)">
-          </app-user-create>
+          <div class="table__wrapper">
+            <table class="order__table">
+              <thead>
+              <tr>
+                <th>Images</th>
+                <th>Name</th>
+                <th>Size</th>
+                <th>Count</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Cost</th>
+                <th>Created Date</th>
+                <th>Advice</th>
+              </tr>
+              </thead>
+              <tbody *ngIf="productList.length">
+              <tr *ngFor="let product of productList" class="table__tbody">
+                <td style="max-width: 160px; max-height: 160px">
+                  <app-carousel-admin [images]="product.imageItems"></app-carousel-admin>
+                </td>
+                <td>
+                  <p>{{product.name}}</p>
+                </td>
+                <td>
+                  <table class="product__table">
+                    <thead>
+                    <tr>
+                      <th>Size</th>
+                      <th>Count</th>
+                      <th>Add</th>
+                    </tr>
+                    </thead>
+                    <tbody *ngIf="product.productCountList">
+                    <tr *ngFor="let productCount of product.productCountList">
+                      <td>{{productCount.size}}</td>
+                      <td>{{productCount.count}}</td>
+                      <td>
+                        <button class="btn success__btn" (click)="openModal('addToProductCount',productCount.id)">Add
+                        </button>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </td>
+                <td>
+                  {{product.count}}
+                </td>
+                <td>
+                  <ng-container *ngIf="product.descriptionItems">
+                    <p *ngFor="let text of product.descriptionItems">
+                      {{text.text}}
+                    </p>
+                  </ng-container>
+                </td>
+                <td>
+                  {{product.categoryName}}
+                </td>
+                <td>
+                  {{product.cost}} $
+                </td>
+                <td>
+                  {{product.createDate}}
+                </td>
+                <td>
+                  {{product.advice}}
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="admin__modal" *ngIf="componentState">
+  <div class="black-curtain" (click)="closeModal()"></div>
+  <div class="admin__content add-product__content">
+    <div class="close__btn" (click)="closeModal()">
+      <div class="inside"></div>
+    </div>
+    <h2 class="admin__header" *ngIf="componentState=='create'">Create Product</h2>
+    <form class="admin__form" *ngIf="componentState=='create'" [formGroup]="createProductForm">
+      <div class="admin__form--item__wrapper">
+        <div class="admin__form--item">
+          <label>Name</label>
+          <input class="input--admin" type="text"
+                 formControlName="name">
+        </div>
+        <div class="admin__form--item">
+          <label>Cost ($)</label>
+          <input class="input--admin" type="number"
+                 formControlName="cost">
+        </div>
+      </div>
+
+      <div class="admin__form--item__wrapper">
+        <div class="admin__form--item">
+          <label>Category</label>
+          <select class="input--admin category__list" formControlName="categoryId">
+            <ng-container *ngFor="let category of categoryList">
+              <option value="{{category.id}}">{{category.name}}</option>
+            </ng-container>
+          </select>
+        </div>
+
+        <div class="admin__form--item">
+          <label *ngIf="images.length">Images {{images.length}}</label>
+          <label *ngIf="images.length===0">Images </label>
+          <input class="input--admin images-file__input" id="file" type="file" multiple
+                 formControlName="images" (change)="onFileChange($event)"
+                 accept="image/*">
+          <label class="btn" for="file">Choose a file</label>
+        </div>
+      </div>
+
+      <div class="admin__form--item">
+        <label>Advice</label>
+        <textarea formControlName="advice"></textarea>
+      </div>
+
+      <div class="admin__form--item">
+        <label>Description</label>
+        <textarea formControlName="description"></textarea>
+      </div>
+
+
+      <div class="admin__form--item__wrapper">
+        <div class="admin__form--item with-save__input">
+          <label>WithSize</label>
+          <input class="input--admin" type="checkbox" [checked]="createProductForm.value.withSize"
+                 formControlName="withSize">
+        </div>
+
+        <button class="btn success__btn create__btn"
+                (click)="createProductBtn()" type="submit">Create
+        </button>
+      </div>
+    </form>
+
+    <h2 class="admin__header" *ngIf="componentState=='addToProductCount'">In Come product</h2>
+    <form class="admin__form add-product__form" [formGroup]="addProductForm">
+      <label>Count</label>
+      <input class="input--admin" type="number"
+             formControlName="count">
+      <button class="btn success__btn" (click)="addToProductCount()">Add</button>
+    </form>
   </div>
 </div>

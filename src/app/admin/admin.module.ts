@@ -13,8 +13,10 @@ import {UserCreateComponent} from './parts/user-create/user-create.component';
 import {PaginationComponent} from './parts/pagination/pagination.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import {ReactiveFormsModule} from "@angular/forms";
-import { ProductComponent } from './pages/product/product.component';
-import { CategoryComponent } from './pages/category/category.component';
+import {ProductComponent} from './pages/product/product.component';
+import {CategoryComponent} from './pages/category/category.component';
+import {AppModule} from "../app.module";
+import { CarouselAdminComponent } from './parts/carousel-admin/carousel-admin.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { CategoryComponent } from './pages/category/category.component';
     UserCreateComponent,
     PaginationComponent,
     ProductComponent,
-    CategoryComponent
+    CategoryComponent,
+    CarouselAdminComponent,
   ],
   imports: [
     NgxPaginationModule,

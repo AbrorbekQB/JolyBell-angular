@@ -11,7 +11,7 @@ import {CardComponent} from './parts/card/card.component';
 import {FaqComponent} from './pages/faq/faq.component';
 import {ProductComponent} from './pages/product/product.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {OrdersModalComponent} from './parts/orders-modal/orders-modal.component';
 import {OrderComponent} from './pages/order/order.component';
 import {ToastrModule} from "ngx-toastr";
@@ -26,38 +26,41 @@ import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    HeaderComponent,
-    FooterComponent,
-    CategoryComponent,
-    CardComponent,
-    FaqComponent,
-    ProductComponent,
-    OrdersModalComponent,
-    OrderComponent,
-    AccountComponent,
-    CarouselComponent,
-    PurchaseComponent,
-    BookingComponent,
-    ChoisePaymentComponent
-  ],
-  imports: [
-    NgxPaginationModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    ToastrModule.forRoot()
-  ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  }],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        HeaderComponent,
+        FooterComponent,
+        CategoryComponent,
+        CardComponent,
+        FaqComponent,
+        ProductComponent,
+        OrdersModalComponent,
+        OrderComponent,
+        AccountComponent,
+        CarouselComponent,
+        PurchaseComponent,
+        BookingComponent,
+        ChoisePaymentComponent
+    ],
+    imports: [
+        NgxPaginationModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        ToastrModule.forRoot()
+    ],
+    providers: [{
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        multi: true
+    }],
+    exports: [
+        CarouselComponent
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
