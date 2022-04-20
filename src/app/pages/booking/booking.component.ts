@@ -3,6 +3,7 @@ import {ApiService} from "../../shared/services/api.service";
 import {Router} from "@angular/router";
 import {NotificationService} from "../../shared/services/notification.service";
 import {FormControl, FormGroup} from "@angular/forms";
+import {CartService} from "../../shared/services/cart.service";
 
 @Component({
   selector: 'app-booking',
@@ -22,7 +23,8 @@ export class BookingComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private notifyService: NotificationService
+    private notifyService: NotificationService,
+    public cartService: CartService
   ) {
   }
 
@@ -35,6 +37,7 @@ export class BookingComponent implements OnInit {
           this.router.navigate(['/'])
       });
     }
+    this.cartService.updateTotalAmountInCart()
   }
 
   checkPromoCode() {

@@ -92,7 +92,7 @@
                   {{product.advice}}
                 </td>
                 <td>
-                  <button class="btn edit__btn" (click)="openModal('editProduct',product.id)">
+                  <button class="btn edit__btn" (click)="openModal('doEditProduct',product.id)">
                     <img src="assets/img/edit.svg">
                   </button>
                 </td>
@@ -195,13 +195,61 @@
       <button class="btn cancel__btn" type="button" (click)="closeModal();updateProductList('')">Cancel</button>
     </form>
   </div>
+
+
   <div class="admin__content edit-product__content" *ngIf="componentState=='editProduct'">
     <div class="close__btn" (click)="closeModal()">
       <div class="inside"></div>
     </div>
     <h2 class="admin__header">Edit Product</h2>
-    <form class="admin__form edit-product">
+    <div class="edit-product__wrapper">
+      <div class="image__list">
+        <div class="image__item" *ngFor="let oldImage of productDetails.imageItems">
+          <div class="close__btn">
+            <div class="inside"></div>
+          </div>
+          <!--          <img src="assets/img/product/2022-04-17/3ebd7fd3-9ea9-46c8-a86b-8e6f00d1d114.png">-->
+          <img [src]="oldImage.url">
+        </div>
 
-    </form>
+      </div>
+      <form class="admin__form edit-product__form" [formGroup]="editProductForm">
+        <div class="admin__form--item__wrapper">
+          <div class="admin__form--item">
+            <label>Name</label>
+            <input class="input--admin" type="text"
+                   formControlName="name" [value]="productDetails.name">
+          </div>
+          <div class="admin__form--item">
+            <label>Cost ($)</label>
+            <input class="input--admin" type="number"
+                   formControlName="cost" [value]="productDetails.cost">
+          </div>
+        </div>
+
+        <div class="admin__form--item__wrapper" style="justify-content: center">
+          <div class="admin__form--item">
+            <label>Images </label>
+            <input id="editImage" class="input--admin images-file__input" type="file" multiple
+                   formControlName="images" (change)="onFileChange($event)"
+                   accept="image/*">
+            <label class="btn" for="editImage">Add new Image</label>
+          </div>
+        </div>
+
+        <div class="admin__form--item">
+          <label>Advice</label>
+          <textarea formControlName="advice" [value]="productDetails.advice"></textarea>
+        </div>
+
+        <div class="admin__form--item">
+          <label>Description</label>
+          <textarea formControlName="description" [value]="productDetails.descriptionItems"></textarea>
+        </div>
+        <button class="btn success__btn edit-product__btn"
+                (click)="editProductBtn(productDetails.id)" type="submit">Update
+        </button>
+      </form>
+    </div>
   </div>
 </div>

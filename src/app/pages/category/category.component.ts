@@ -2,6 +2,7 @@ import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiService} from "../../shared/services/api.service";
 import {FormControl, FormGroup} from "@angular/forms";
+import {CartService} from "../../shared/services/cart.service";
 
 @Component({
   selector: 'app-category',
@@ -20,6 +21,7 @@ export class CategoryComponent implements OnInit, OnChanges {
     private route: ActivatedRoute,
     private apiService: ApiService,
     private router: Router,
+    public cartService: CartService
   ) {
   }
 
@@ -40,6 +42,7 @@ export class CategoryComponent implements OnInit, OnChanges {
       console.log(err)
       this.router.navigate(['/']).then()
     })
+    this.cartService.updateTotalAmountInCart()
   }
 
   formSubmit() {

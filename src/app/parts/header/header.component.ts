@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ApiService} from 'src/app/shared/services/api.service';
-import {CartService} from "../../shared/services/cart.service";
 import {NotificationService} from "../../shared/services/notification.service";
 
 @Component({
@@ -12,6 +11,9 @@ import {NotificationService} from "../../shared/services/notification.service";
 })
 
 export class HeaderComponent implements OnInit {
+  @Output() updateTotalAmountInCart: EventEmitter<any> = new EventEmitter();
+  @Input() public totalAmount: string = "0"
+
   public categoryList: Array<any> = []
   public profilePopupShow = false
   public signupShow = false
@@ -32,7 +34,6 @@ export class HeaderComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    public cartService: CartService,
     private notifyService: NotificationService
   ) {
   }
@@ -45,9 +46,8 @@ export class HeaderComponent implements OnInit {
     }, err => {
       this.router.navigate(['/']).then()
     })
-    if (localStorage.getItem('cartId')) {
-      // this.cartService.getTotalCost(localStorage.getItem('cartId'))
-    }
+    if (this.totalAmount === "0")
+      this.updateTotalAmountInCart.emit()
   }
 
   profilePopup() {

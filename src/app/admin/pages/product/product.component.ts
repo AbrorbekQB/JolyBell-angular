@@ -27,8 +27,10 @@ export class ProductComponent implements OnInit {
   public addProductCountId: string = ""
   public totalLength: any
   public page: number = 1
-  public productId: string = "";
-  public productDetails: any = []
+  public productId: string = ""
+  public productDetails: any = {
+    descriptionItems: [""]
+  }
 
   public createProductForm = new FormGroup({
     images: new FormControl(''),
@@ -38,6 +40,14 @@ export class ProductComponent implements OnInit {
     advice: new FormControl(''),
     description: new FormControl([]),
     withSize: new FormControl(true)
+  })
+
+  public editProductForm = new FormGroup({
+    images: new FormControl(''),
+    name: new FormControl(this.productDetails.name),
+    cost: new FormControl(''),
+    advice: new FormControl(),
+    description: new FormControl([])
   })
 
   public searchCategoryFrom = new FormGroup({
@@ -58,13 +68,6 @@ export class ProductComponent implements OnInit {
     this.updateProductList(this.searchCategoryFrom.value.search)
   }
 
-  openCreateProductModal() {
-    this.componentState = "create"
-    this.apiService.getCategoryList().subscribe(res => {
-      this.categoryList = res
-    })
-  }
-
   openModal(name: string, arg: any) {
     this.componentState = name
     switch (name) {
@@ -83,12 +86,22 @@ export class ProductComponent implements OnInit {
         document.body.style.overflow = 'hidden'
         break
       }
-      case 'editProduct': {
+      case 'doEditProduct': {
         this.productId = arg
-        document.body.style.overflow = 'hidden'
+
         this.apiService.getProductById(arg).subscribe(res => {
-          console.log(res)
+          this.productDetails = res
+          let description = ""
+          this.productDetails.descriptionItems.forEach((des: any) => {
+            description += des.text + "\n";
+          })
+          this.productDetails.descriptionItems = description.trim()
         });
+        this.componentState = 'editProduct'
+        break
+      }
+      case 'editProduct': {
+        document.body.style.overflow = 'hidden'
         break
       }
     }
@@ -104,7 +117,9 @@ export class ProductComponent implements OnInit {
     this.images = []
     for (let i = 0; i < event.target.files.length; i++) {
       this.images.push(event.target.files[i])
+      console.log(event.target.files[i].path)
     }
+    console.log(this.images)
   }
 
   createProductBtn() {
@@ -168,5 +183,10 @@ export class ProductComponent implements OnInit {
     }, error => {
       this.notifyService.showError("Can not update");
     })
+  }
+
+  // edit product
+  editProductBtn(id: string) {
+    console.log(this.editProductForm.value)
   }
 }

@@ -1,5 +1,6 @@
 <header class="home--header">
-  <app-header></app-header>
+  <app-header (updateTotalAmountInCart) = "cartService.updateTotalAmountInCart()"
+              [totalAmount] = "cartService.totalAmount"></app-header>
 </header>
 <div class="video-section">
   <video class="home-video" poster="/assets/img/0.jpg" loop autoplay playsinline>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CartService} from "../../shared/services/cart.service";
 
 @Component({
   selector: 'app-choise-payment',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChoisePaymentComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public cartService: CartService
+  ) { }
 
   ngOnInit(): void {
+    this.cartService.updateTotalAmountInCart()
   }
 
   createReceipt() {

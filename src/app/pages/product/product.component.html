@@ -1,5 +1,6 @@
 <div class="category--header">
-  <app-header></app-header>
+  <app-header (updateTotalAmountInCart) = "cartService.updateTotalAmountInCart()"
+   [totalAmount] = "cartService.totalAmount"></app-header>
 </div>
 <section class="page--section">
   <div class="container">
@@ -27,44 +28,14 @@
         </button>
 
         <form [formGroup]="formOrder" (submit)="addToCart()">
-          <div class="product-info-sizes" *ngIf="productDetail.size!=0">
+          <div class="product-info-sizes" *ngIf="productDetail.productCountList[0].size!='all'">
             <div class="product-info-sizes-title">Choose a size:</div>
             <div class="product-info-sizes-list">
               <div class="product-info-sizes-list-content">
-                <label class="product-info-sizes__label">
-                  <input class="product-info-sizes__input" type="radio" value="xs" name="size"
+                <label class="product-info-sizes__label" *ngFor="let size of productDetail.productCountList">
+                  <input class="product-info-sizes__input" type="radio" [value]="size.size" name="size"
                          formControlName="size">
-                  <span class="product-info-size__span">XS</span>
-                </label>
-                <label class="product-info-sizes__label">
-                  <input class="product-info-sizes__input" type="radio" value="s" name="size"
-                         formControlName="size">
-                  <span class="product-info-size__span">S</span>
-                </label>
-                <label class="product-info-sizes__label">
-                  <input class="product-info-sizes__input" type="radio" value="m" name="size"
-                         formControlName="size">
-                  <span class="product-info-size__span">M</span>
-                </label>
-                <label class="product-info-sizes__label">
-                  <input class="product-info-sizes__input" type="radio" value="l" name="size"
-                         formControlName="size">
-                  <span class="product-info-size__span">L</span>
-                </label>
-                <label class="product-info-sizes__label">
-                  <input class="product-info-sizes__input" type="radio" value="xl" name="size"
-                         formControlName="size">
-                  <span class="product-info-size__span">XL</span>
-                </label>
-                <label class="product-info-sizes__label">
-                  <input class="product-info-sizes__input" type="radio" value="2xl" name="size"
-                         formControlName="size">
-                  <span class="product-info-size__span">2XL</span>
-                </label>
-                <label class="product-info-sizes__label">
-                  <input class="product-info-sizes__input" type="radio" value="3xl" name="size"
-                         formControlName="size">
-                  <span class="product-info-size__span">3XL</span>
+                  <span class="product-info-size__span">{{size.size.toUpperCase()}}</span>
                 </label>
               </div>
             </div>

@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {ApiService} from "../../shared/services/api.service";
 import {ActivatedRoute} from "@angular/router";
 import {NotificationService} from "../../shared/services/notification.service";
+import {CartService} from "../../shared/services/cart.service";
 
 @Component({
   selector: 'app-product',
@@ -13,6 +14,7 @@ import {NotificationService} from "../../shared/services/notification.service";
 export class ProductComponent implements OnInit {
   public takingCareShow = false
   public productId: string = ""
+
   public formOrder = new FormGroup({
     count: new FormControl(1),
     size: new FormControl('')
@@ -32,7 +34,8 @@ export class ProductComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
-    private notifyService: NotificationService
+    private notifyService: NotificationService,
+    public cartService: CartService
   ) {
   }
 
@@ -71,10 +74,11 @@ export class ProductComponent implements OnInit {
       }).subscribe(res => {
         console.log(res)
         this.showToasterSuccess("Update successfully!")
+        this.cartService.updateTotalAmountInCart()
       }, error => {
         this.showToasterError("Error add")
       })
-      this.apiService.getTotalCostApi(localStorage.getItem('cartId'))
+      // this.apiService.getTotalAmountApi(localStorage.getItem('cartId'))
       return
     }
     this.apiService.createOrder({
@@ -85,6 +89,7 @@ export class ProductComponent implements OnInit {
       console.log(res)
     }, err => {
       this.showToasterSuccess("Create successfully!")
+      this.cartService.updateTotalAmountInCart()
       localStorage.setItem('cartId', err.error.text)
     })
   }

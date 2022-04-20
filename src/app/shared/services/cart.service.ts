@@ -6,19 +6,23 @@ import {ApiService} from "./api.service";
 })
 
 export class CartService {
-  public totalCost = 0
+  public totalAmount = "0"
 
   constructor(
-    private apiService:ApiService
-  ) {}
-
-  public returnTotalCost(): number {
-    return this.totalCost
+    private apiService: ApiService
+  ) {
   }
 
-  public getTotalCost(cartId: any) {
-    this.apiService.getTotalCostApi(cartId).subscribe(res => {
-      this.totalCost = res.cost
-    })
+  public returnTotalCost(): any {
+    return this.totalAmount
+  }
+
+  updateTotalAmountInCart() {
+    if (localStorage.getItem('cartId')) {
+      this.apiService.getTotalAmountApi(localStorage.getItem('cartId')).subscribe(res => {
+          this.totalAmount = res;
+        }
+      )
+    }
   }
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../../shared/services/api.service";
 import {NotificationService} from "../../shared/services/notification.service";
 import {Router} from "@angular/router";
+import {CartService} from "../../shared/services/cart.service";
 
 @Component({
   selector: 'app-purchase',
@@ -18,7 +19,8 @@ export class PurchaseComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private notifyService: NotificationService
+    private notifyService: NotificationService,
+    public cartService: CartService
   ) {
   }
 
@@ -32,6 +34,7 @@ export class PurchaseComponent implements OnInit {
           this.router.navigate(['/'])
       });
     }
+    this.cartService.updateTotalAmountInCart()
   }
 
   remove(id: string, productId: string) {
@@ -41,6 +44,7 @@ export class PurchaseComponent implements OnInit {
       orderItemId: id
     }).subscribe(() => {
       if (this.orderId) {
+        this.cartService.updateTotalAmountInCart()
         this.apiService.getOrderById(this.orderId).subscribe(res => {
           this.orderDetails = res
           console.log(res)

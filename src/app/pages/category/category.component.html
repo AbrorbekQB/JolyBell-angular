@@ -1,5 +1,6 @@
 <div class="category--header">
-  <app-header></app-header>
+  <app-header (updateTotalAmountInCart) = "cartService.updateTotalAmountInCart()"
+              [totalAmount] = "cartService.totalAmount"></app-header>
 </div>
 <section class="page--section">
   <div class="container">

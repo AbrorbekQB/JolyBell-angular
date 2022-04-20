@@ -45,8 +45,9 @@ export class ApiService {
     return this.http.post(this.url + '/order/update/' + orderId, orderData)
   }
 
-  getTotalCostApi(cartId: any): Observable<any> {
-    return this.http.get(this.url + `/order/get/${cartId}`)
+  getTotalAmountApi(cartId: any): Observable<any> {
+    return this.http.get(this.url + `/order/amount/${cartId}`,
+      {responseType: 'text'})
   }
 
   getOrderById(orderId: string): Observable<any> {

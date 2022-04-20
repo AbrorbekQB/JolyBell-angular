@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {ApiService} from "../../shared/services/api.service";
 import {Router} from "@angular/router";
 import {NotificationService} from "../../shared/services/notification.service";
+import {CartService} from "../../shared/services/cart.service";
 
 @Component({
   selector: 'app-account',
@@ -26,7 +27,8 @@ export class AccountComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private notifyService: NotificationService
+    private notifyService: NotificationService,
+    public cartService: CartService
   ) {
   }
 
@@ -37,6 +39,7 @@ export class AccountComponent implements OnInit {
     }, error => {
       this.router.navigate(['/']).then()
     })
+    this.cartService.updateTotalAmountInCart()
   }
 
 }

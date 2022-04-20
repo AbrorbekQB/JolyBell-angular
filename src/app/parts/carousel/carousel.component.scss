@@ -8,18 +8,22 @@
   border-radius: 15px;
   padding: 30px 30px;
   box-shadow: 0 6px 12px 0 #dce1e1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .carousel-container img {
   display: none;
   border-radius: 15px;
-  height: 100%;
-  width: auto;
+  height: auto;
+  max-width: 80%;
 }
 
 .carousel-container img.image-active {
   display: block;
-  height: 100%;
+  height: auto;
+  max-height: 100%;
   margin: 0 auto;
 }
 
