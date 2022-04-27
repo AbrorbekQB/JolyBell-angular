@@ -12,7 +12,7 @@ import {CartService} from "../../shared/services/cart.service";
 })
 export class BookingComponent implements OnInit {
   // @ts-ignore
-  public orderId: string = localStorage.getItem("cartId")
+  public orderId: string = localStorage.getItem("orderId")
   public orderDetails: any = {
     orderItems: []
   }
@@ -30,14 +30,16 @@ export class BookingComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.orderId) {
-      this.apiService.getOrderById(this.orderId).subscribe(res => {
+      this.apiService.getOrderById(this.orderId, 'CONFIRM').subscribe(res => {
         this.orderDetails = res
         console.log(res)
         if (!this.orderDetails.orderItems.length)
           this.router.navigate(['/'])
+      }, error => {
+        this.router.navigate(['/'])
       });
     }
-    this.cartService.updateTotalAmountInCart()
+    this.cartService.updateTotalAmountInCart('')
   }
 
   checkPromoCode() {
@@ -46,7 +48,7 @@ export class BookingComponent implements OnInit {
         if (res.active) {
           this.notifyService.showSuccess("Success!")
           if (this.orderId) {
-            this.apiService.getOrderById(this.orderId).subscribe(res => {
+            this.apiService.getOrderById(this.orderId, 'PENDING').subscribe(res => {
               this.orderDetails = res
               console.log(res)
             });
@@ -60,6 +62,17 @@ export class BookingComponent implements OnInit {
   }
 
   checkout() {
-    this.router.navigate(['/booking/choice-payment'])
+    this.router.navigate(['/booking/choice-payment']).then()
+  }
+
+  cancelOrder() {
+    this.cartService.updateTotalAmountInCart('')
+    let orderId = localStorage.getItem("orderId")
+    if (orderId) {
+      localStorage.removeItem("orderId")
+      this.apiService.cancelOrder(orderId).subscribe()
+    }
+    this.router.navigate(['/']).then()
+    this.notifyService.showSuccess("Order successfully canceled!")
   }
 }

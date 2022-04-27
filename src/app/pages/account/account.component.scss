@@ -87,10 +87,12 @@ input {
     opacity: 0.8;
   }
 }
+
 .log-out__btn {
   margin-right: 20%;
   margin-top: 20px;
 }
+
 .update__btn {
   margin-top: 25px;
 }
@@ -121,9 +123,25 @@ textarea {
   border-radius: 6px;
   border: 1px solid #818d92;
   background-color: #F4F6F8;
+  padding: 5px;
 }
 
 .password-input__wrapper {
   display: flex;
   width: 100%;
+}
+
+.province__dropdown,
+.district__dropdown {
+  width: 80%;
+  border-radius: 6px;
+  border: 1px solid #818d92;
+  background-color: #F4F6F8;
+  padding: 4px 10px;
+  margin-bottom: 24px;
+  font-size: 18px;
+}
+
+.district__dropdown {
+  margin-left: auto;
 }

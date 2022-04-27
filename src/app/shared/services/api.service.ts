@@ -50,8 +50,11 @@ export class ApiService {
       {responseType: 'text'})
   }
 
-  getOrderById(orderId: string): Observable<any> {
-    return this.http.get(`${this.url}/order/${orderId}`)
+  getOrderById(orderId: string, status: string): Observable<any> {
+    return this.http.post(`${this.url}/order/get`, {
+      "id": orderId,
+      "status": status
+    })
   }
 
   removeOrderItem(removeData: any): Observable<any> {
@@ -59,7 +62,12 @@ export class ApiService {
   }
 
   orderConfirm(orderId: any): Observable<any> {
-    return this.http.get(`${this.url}/order/confirm/${orderId}`)
+    return this.http.get(`${this.url}/order/confirm/${orderId}`,
+      {responseType: 'text'})
+  }
+
+  cancelOrder(orderId: string) {
+    return this.http.get(`${this.url}/order/cancel/${orderId}`)
   }
 
   // product
@@ -91,6 +99,30 @@ export class ApiService {
     return this.http.get(`${this.url}/user/get`)
   }
 
+  updateAddress(personalInfo: any) {
+    return this.http.post(`${this.url}/user/update-address`, {
+      "district": personalInfo.district,
+      "province": personalInfo.province,
+      "address": personalInfo.address
+    })
+  }
+
+  updatePersonalData(value: any) {
+    return this.http.post(`${this.url}/user/update`, {
+      "firstname": value.firstname,
+      "lastname": value.lastname,
+      "patronymic": value.patronymic,
+      "phoneNumber": value.phoneNumber
+    })
+  }
+
+  changePassword(value: any) {
+    return this.http.post(`${this.url}/user/change/password`, {
+      password: value.password,
+      confirmPassword: value.confirmPassword
+    })
+  }
+
   // PromoCode
 
   checkPromocode(code: string, orderId: string): Observable<any> {
@@ -100,6 +132,16 @@ export class ApiService {
     })
 
   }
+
+  // Handbook
+  provinceList() {
+    return this.http.get(`${this.url}/handbook/province`)
+  }
+
+  districtList(provinceId: string) {
+    return this.http.get(`${this.url}/handbook/district/${provinceId}`)
+  }
+
 
   // for Admin
   // user

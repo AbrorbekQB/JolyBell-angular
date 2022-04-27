@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
   constructor(public cartService: CartService) { }
 
   ngOnInit(): void {
-    this.cartService.updateTotalAmountInCart()
+    this.cartService.updateTotalAmountInCart('')
   }
 
 }

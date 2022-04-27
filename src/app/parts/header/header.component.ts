@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/']).then()
     })
     if (this.totalAmount === "0")
-      this.updateTotalAmountInCart.emit()
+      this.updateTotalAmountInCart.emit("")
   }
 
   profilePopup() {

@@ -74,7 +74,7 @@ export class ProductComponent implements OnInit {
       }).subscribe(res => {
         console.log(res)
         this.showToasterSuccess("Update successfully!")
-        this.cartService.updateTotalAmountInCart()
+        this.cartService.updateTotalAmountInCart('')
       }, error => {
         this.showToasterError("Error add")
       })
@@ -89,8 +89,8 @@ export class ProductComponent implements OnInit {
       console.log(res)
     }, err => {
       this.showToasterSuccess("Create successfully!")
-      this.cartService.updateTotalAmountInCart()
       localStorage.setItem('cartId', err.error.text)
+      this.cartService.updateTotalAmountInCart('')
     })
   }
 

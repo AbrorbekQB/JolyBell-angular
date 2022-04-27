@@ -1,6 +1,6 @@
 <div class="category--header">
-  <app-header (updateTotalAmountInCart) = "cartService.updateTotalAmountInCart()"
-              [totalAmount] = "cartService.totalAmount"></app-header>
+  <app-header (updateTotalAmountInCart)="cartService.updateTotalAmountInCart('')"
+              [totalAmount]="cartService.totalAmount"></app-header>
 </div>
 <div class="page--section">
   <div class="container">
@@ -28,7 +28,10 @@
         <textarea type="text"></textarea>
         <label>Note</label>
         <textarea type="text"></textarea>
-        <button class="black-white__btn" type="submit">Proceed</button>
+        <div class="button__wrapper">
+          <button class="black-white__btn" type="submit">Proceed</button>
+          <button class="btn cancel__btn" type="reset" (click)="cancelOrder()">CANCEL</button>
+        </div>
       </form>
       <div class="order__wrapper">
         <h2>Your order</h2>

@@ -26,15 +26,18 @@ export class PurchaseComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.orderId) {
-      this.apiService.getOrderById(this.orderId).subscribe(res => {
+      this.apiService.getOrderById(this.orderId, 'PENDING').subscribe(res => {
         this.orderDetails = res
         console.log(res)
         console.log(this.orderDetails.orderItems.size)
         if (!this.orderDetails.orderItems.length)
           this.router.navigate(['/'])
+      }, error => {
       });
+    } else {
+      this.router.navigate(['/'])
     }
-    this.cartService.updateTotalAmountInCart()
+    this.cartService.updateTotalAmountInCart('')
   }
 
   remove(id: string, productId: string) {
@@ -44,8 +47,8 @@ export class PurchaseComponent implements OnInit {
       orderItemId: id
     }).subscribe(() => {
       if (this.orderId) {
-        this.cartService.updateTotalAmountInCart()
-        this.apiService.getOrderById(this.orderId).subscribe(res => {
+        this.cartService.updateTotalAmountInCart('')
+        this.apiService.getOrderById(this.orderId, 'PENDING').subscribe(res => {
           this.orderDetails = res
           console.log(res)
           console.log(this.orderDetails.orderItems.length)
@@ -59,8 +62,23 @@ export class PurchaseComponent implements OnInit {
   bookedOrder() {
     if (localStorage.getItem("Authorization") && localStorage.getItem("cartId")) {
       this.apiService.getUserDetails().subscribe(res => {
-        this.router.navigate([`/booking/details`]).then()
-        this.notifyService.showSuccess("Order successfully booked!")
+
+        this.apiService.orderConfirm(localStorage.getItem("cartId")).subscribe(res => {
+            if (res === 'true') {
+              this.router.navigate([`/booking/details`]).then()
+              this.notifyService.showSuccess("Order successfully booked!")
+            } else {
+              this.router.navigate([`/booking/details`]).then()
+              this.notifyService.showWarning("The order was not complete!")
+            }
+            localStorage.setItem("orderId", <string>localStorage.getItem("cartId"))
+            localStorage.removeItem("cartId")
+          }, error => {
+            this.router.navigate([`/`]).then()
+            localStorage.removeItem("cartId")
+            this.notifyService.showWarning("Error in booking!")
+          }
+        )
       }, () => {
         this.notifyService.showWarning("Sorry! Only Registered user can do booking!")
       })

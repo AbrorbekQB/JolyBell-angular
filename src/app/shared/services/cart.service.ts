@@ -17,12 +17,19 @@ export class CartService {
     return this.totalAmount
   }
 
-  updateTotalAmountInCart() {
-    if (localStorage.getItem('cartId')) {
+  updateTotalAmountInCart(id: string) {
+    if (id)
+      this.apiService.getTotalAmountApi(id).subscribe(res => {
+          this.totalAmount = res;
+        }
+      )
+    if (!id && localStorage.getItem('cartId')) {
       this.apiService.getTotalAmountApi(localStorage.getItem('cartId')).subscribe(res => {
           this.totalAmount = res;
         }
       )
+    } else {
+      this.totalAmount = "0"
     }
   }
 }

@@ -1,6 +1,6 @@
 <div class="category--header">
-  <app-header (updateTotalAmountInCart) = "cartService.updateTotalAmountInCart()"
-              [totalAmount] = "cartService.totalAmount"></app-header>
+  <app-header (updateTotalAmountInCart)="cartService.updateTotalAmountInCart('')"
+              [totalAmount]="cartService.totalAmount"></app-header>
 </div>
 
 <section class="account__section">
@@ -11,21 +11,22 @@
     <div class="personal-info__wrapper">
       <h2 class="form__heading">Personal data</h2>
       <!--        <button class="log-out__btn" type="button">Log out</button>-->
-      <form class="personal-info-form" [formGroup]="personalUpdateForm">
+      <form class="personal-info-form" [formGroup]="personalUpdateForm" (submit)="updatePersonalData()">
         <div class="account__left">
           <label>Name</label>
-          <input type="text" value="{{personalInfo.firstname}}">
+          <input type="text" value="{{personalInfo.firstname}}" formControlName="firstname">
           <label>Patronymic</label>
-          <input type="text" value="{{personalInfo.patronymic}}">
+          <input type="text" value="{{personalInfo.patronymic}}" formControlName="patronymic">
           <label>Email address</label>
           <input type="email" disabled value="{{personalInfo.username}}">
-          <button class="log-out__btn" type="submit">Log out</button>
+          <button class="log-out__btn" type="button" (click)="logout()">Log out</button>
         </div>
         <div class="account__right">
           <label>Surname</label>
-          <input type="text" value="{{personalInfo.lastname}}">
+          <input type="text" value="{{personalInfo.lastname}}" formControlName="surname">
           <label>Phone number</label>
-          <input type="text" value="{{personalInfo.phoneNumber}}">
+          <input type="text" value="{{personalInfo.phoneNumber}}" placeholder="998 90 000 00 00"
+                 formControlName="phoneNumber">
           <button class="update__btn" type="submit">Update</button>
         </div>
       </form>
@@ -35,22 +36,44 @@
       <h2 class="form__heading">
         Delivery address
       </h2>
-      <form class="delivery__form">
+      <form class="delivery__form" [formGroup]="addressForm" (submit)="updateAddress()">
         <div class="delivery__from__top">
           <div class="account__left">
             <label>Province</label>
-            <input type="text">
+            <select class="province__dropdown" formControlName="province" (ngModelChange)="districtList($event)">
+              <option value="all"></option>
+              <ng-container *ngFor="let province of provinceArray">
+                <ng-container *ngIf="province.id != personalInfo.province">
+                  <option [value]="province.id"
+                  >{{province.name}}</option>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngFor="let province of provinceArray">
+                <ng-container *ngIf="province.id == personalInfo.province">
+                  <option [value]="province.id"
+                          [selected]="true">{{province.name}}</option>
+                </ng-container>
+              </ng-container>
+            </select>
           </div>
           <div class="account__right">
             <label>District</label>
-            <input type="text">
+            <select class="district__dropdown" formControlName="district">
+              <option value="all"></option>
+              <ng-container *ngFor="let district of districtArray">
+                <option *ngIf="district.id != personalInfo.district" [value]="district.id">{{district.name}}</option>
+              </ng-container>
+              <ng-container *ngFor="let district of districtArray">
+                <option *ngIf="district.id == personalInfo.district" [value]="district.id"
+                        [selected]="true">{{district.name}}</option>
+              </ng-container>
+            </select>
           </div>
         </div>
         <label>Address</label>
-        <textarea type="text">
-
+        <textarea type="text" formControlName="address" [value]="personalInfo.address">
         </textarea>
-        <button class="update__btn">
+        <button class="update__btn" type="submit">
           Update
         </button>
       </form>
@@ -60,18 +83,18 @@
       <h2 class="form__heading">
         Password
       </h2>
-      <form class="password__form">
+      <form class="password__form" [formGroup]="changepasswordForm" (submit)="changePassword()">
         <div class="password-input__wrapper">
           <div class="account__left">
             <label>New password</label>
-            <input type="password">
+            <input type="password" formControlName="password">
           </div>
           <div class="account__right">
             <label>Repeat password</label>
-            <input type="password">
+            <input type="password" formControlName="confirmPassword">
           </div>
         </div>
-        <button class="update__btn">Update</button>
+        <button class="update__btn" type="submit">Update</button>
       </form>
     </div>
   </div>

@@ -132,6 +132,10 @@ h3.card__heading {
 .purchase__table {
   margin: 0 auto;
   width: 700px;
+
+  th, td {
+    border: none;
+  }
 }
 
 .table__heading {

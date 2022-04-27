@@ -13,7 +13,7 @@ export class ChoisePaymentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cartService.updateTotalAmountInCart()
+    this.cartService.updateTotalAmountInCart('')
   }
 
   createReceipt() {

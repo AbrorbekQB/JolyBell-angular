@@ -12,7 +12,7 @@ export class FaqComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cartService.updateTotalAmountInCart()
+    this.cartService.updateTotalAmountInCart('')
   }
 
 }

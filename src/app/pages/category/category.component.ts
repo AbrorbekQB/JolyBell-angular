@@ -42,7 +42,7 @@ export class CategoryComponent implements OnInit, OnChanges {
       console.log(err)
       this.router.navigate(['/']).then()
     })
-    this.cartService.updateTotalAmountInCart()
+    this.cartService.updateTotalAmountInCart('')
   }
 
   formSubmit() {
