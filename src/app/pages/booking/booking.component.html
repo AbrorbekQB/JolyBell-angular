@@ -6,73 +6,89 @@
   <div class="container">
     <h1 class="section--heading">
       Checkout
+      <app-timer class="timer__item" [orderLifeTime]="orderLifeTime"></app-timer>
     </h1>
     <div class="proceed__wrapper">
-      <form class="details__form" (submit)="checkout()">
+      <form class="details__form" [formGroup]="receiverDetailsForm" (submit)="checkout()">
         <h2>Enter delivery details</h2>
         <label>Name</label>
-        <input type="text">
+        <input type="text" formControlName="name">
         <label>SURNAME</label>
-        <input type="text">
+        <input type="text" formControlName="surname">
         <label>PATRONYMIC</label>
-        <input type="text">
+        <input type="text" formControlName="patronymic">
         <label>PHONE NUMBER</label>
-        <input type="text">
+        <input type="text" formControlName="phoneNumber">
         <label>Email</label>
-        <input type="email">
+        <input type="email" formControlName="email">
         <label>PROVINCE</label>
-        <input type="text">
+        <select class="province__dropdown" formControlName="province" (ngModelChange)="districtList($event)">
+          <option value="all"></option>
+          <ng-container *ngFor="let province of provinceArray">
+            <ng-container *ngIf="province.id != receiverDetailsObject.province">
+              <option [value]="province.id"
+              >{{province.name}}</option>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngFor="let province of provinceArray">
+            <ng-container *ngIf="province.id == receiverDetailsObject.province">
+              <option [value]="province.id"
+                      [selected]="true">{{province.name}}</option>
+            </ng-container>
+          </ng-container>
+        </select>
         <label>DISTRICT</label>
-        <input type="text">
+        <select class="district__dropdown" formControlName="district">
+          <option value="all"></option>
+          <ng-container *ngFor="let district of districtArray">
+            <option *ngIf="district.id != receiverDetailsObject.district"
+                    [value]="district.id">{{district.name}}</option>
+          </ng-container>
+          <ng-container *ngFor="let district of districtArray">
+            <option *ngIf="district.id == receiverDetailsObject.district" [value]="district.id"
+                    [selected]="true">{{district.name}}</option>
+          </ng-container>
+        </select>
         <label>Address</label>
-        <textarea type="text"></textarea>
+        <textarea type="text" formControlName="address"></textarea>
         <label>Note</label>
-        <textarea type="text"></textarea>
+        <textarea type="text" formControlName="note"></textarea>
         <div class="button__wrapper">
           <button class="black-white__btn" type="submit">Proceed</button>
           <button class="btn cancel__btn" type="reset" (click)="cancelOrder()">CANCEL</button>
         </div>
       </form>
       <div class="order__wrapper">
-        <h2>Your order</h2>
+        <h2 *ngIf="orderDetails.fullReserved">Your order</h2>
+        <h2 class="warm__bg" *ngIf="!orderDetails.fullReserved">Your order</h2>
         <ul class="order__list">
-          <li class="order__item">
+          <li class="order__item" *ngFor="let order of orderDetails.orderItems">
             <p class="order__item__name">
-              B.O.M.J Black
+              {{order.name}}
             </p>
             <p class="order__item__size">
               <span class="order__item__title">Size:
-              <span>XS</span>
+              <span>{{order.size.toUpperCase()}}</span>
               </span>
-              <span class="order__item__title">Quantity:
-              <span>1</span></span>
-              <span class="order__item__cost">26.25 USD</span>
-            </p>
-          </li>
-          <li class="order__item">
-            <p class="order__item__name">
-              B.O.M.J Black
-            </p>
-            <p class="order__item__size">
-              <span class="order__item__title">Size:
-              <span>XS</span>
-              </span>
-              <span class="order__item__title">Quantity:
-              <span>1</span></span>
-              <span class="order__item__cost">26.25 USD</span>
+              <span class="order__item__title" *ngIf="order.count == order.reservedCount">Quantity:
+              <span>{{order.count}}</span></span>
+              <span class="order__item__title warm__color" *ngIf="order.count != order.reservedCount"> Quantity:
+                <span class="success__color">{{order.reserverCount}}</span>/<span
+                  class="error__color">{{order.count}}</span></span>
+              <span class="order__item__cost">{{order.cost}} USD</span>
             </p>
           </li>
           <li class="order__item__footer">
             <p class="order__item__size">
               <span class="order__item__title">Cost of the items:
-              <span>225.34 USD</span>
+              <span>{{orderDetails.totalAmount}} USD</span>
               </span>
               <span class="order__item__title">Delivery cost:
-              <span>22.27 USD</span></span>
+              <span>5 USD</span></span>
             </p>
           </li>
         </ul>
-        <h2 class="order__wrapper--totalAmount">TOTAL DUE: 247.61 USD</h2>
+        <h2 class="order__wrapper--totalAmount">TOTAL DUE: {{orderDetails.totalAmount + 5}} USD</h2>
       </div>
     </div>
     <!--    <form class="promocode__form" [formGroup]="promocodeForm" (submit)="checkPromoCode()">-->

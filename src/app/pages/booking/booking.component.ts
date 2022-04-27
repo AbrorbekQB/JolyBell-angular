@@ -13,11 +13,41 @@ import {CartService} from "../../shared/services/cart.service";
 export class BookingComponent implements OnInit {
   // @ts-ignore
   public orderId: string = localStorage.getItem("orderId")
+  public fullReserved = true
+  public orderLifeTime: number = 0;
   public orderDetails: any = {
     orderItems: []
   }
+  public provinceArray: any = []
+  public districtArray: any = []
+
+
   public promocodeForm = new FormGroup({
     code: new FormControl('')
+  })
+
+  public receiverDetailsObject = {
+    name: '',
+    surname: '',
+    patronymic: '',
+    phoneNumber: '',
+    email: '',
+    province: '',
+    district: '',
+    address: '',
+    note: ''
+  }
+
+  public receiverDetailsForm = new FormGroup({
+    name: new FormControl(''),
+    surname: new FormControl(''),
+    patronymic: new FormControl(''),
+    phoneNumber: new FormControl(''),
+    email: new FormControl(''),
+    province: new FormControl(''),
+    district: new FormControl(''),
+    address: new FormControl(''),
+    note: new FormControl('')
   })
 
   constructor(
@@ -32,9 +62,24 @@ export class BookingComponent implements OnInit {
     if (this.orderId) {
       this.apiService.getOrderById(this.orderId, 'CONFIRM').subscribe(res => {
         this.orderDetails = res
-        console.log(res)
+        this.orderLifeTime = res.orderLifeTime
         if (!this.orderDetails.orderItems.length)
           this.router.navigate(['/'])
+
+        this.apiService.getUserDetails().subscribe(res => {
+          this.receiverDetailsObject.name = res.firstname
+          this.receiverDetailsObject.surname = res.lastname
+          this.receiverDetailsObject.patronymic = res.patronymic
+          this.receiverDetailsObject.phoneNumber = res.phoneNumber
+          this.receiverDetailsObject.email = res.username
+          this.receiverDetailsObject.address = res.address
+          this.receiverDetailsObject.district = res.district
+          this.receiverDetailsObject.province = res.province
+          this.receiverDetailsForm.setValue(this.receiverDetailsObject)
+
+          this.provinceList()
+          this.districtList(res.province)
+        })
       }, error => {
         this.router.navigate(['/'])
       });
@@ -62,7 +107,15 @@ export class BookingComponent implements OnInit {
   }
 
   checkout() {
-    this.router.navigate(['/booking/choice-payment']).then()
+    this.receiverDetailsObject.note = this.receiverDetailsForm.value.note
+    this.apiService.checkout(this.receiverDetailsObject).subscribe(res => {
+      if (res == 'true') {
+        this.notifyService.showSuccess("Successfully checked")
+        this.router.navigate(['/booking/choice-payment']).then()
+      } else {
+        this.notifyService.showError("Check error!")
+      }
+    }, )
   }
 
   cancelOrder() {
@@ -74,5 +127,17 @@ export class BookingComponent implements OnInit {
     }
     this.router.navigate(['/']).then()
     this.notifyService.showSuccess("Order successfully canceled!")
+  }
+
+  provinceList() {
+    this.apiService.provinceList().subscribe(res => {
+      this.provinceArray = res
+    })
+  }
+
+  districtList(value: any) {
+    this.apiService.districtList(value).subscribe(res => {
+      this.districtArray = res
+    })
   }
 }

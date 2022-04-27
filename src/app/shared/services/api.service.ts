@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -68,6 +68,25 @@ export class ApiService {
 
   cancelOrder(orderId: string) {
     return this.http.get(`${this.url}/order/cancel/${orderId}`)
+  }
+
+  checkout(data: any) {
+    console.log(data)
+    return this.http.post(`${this.url}/order/checkout`, {
+        user: {
+          "patronymic": data.patronymic,
+          "phoneNumber": data.phoneNumber,
+          "address": data.address,
+          "province": data.province,
+          "surname": data.surname,
+          "district": data.district,
+          "name": data.name,
+          "email": data.email,
+        },
+        note: data.note,
+        orderId: localStorage.getItem('orderId')
+      },
+      {responseType: 'text'})
   }
 
   // product

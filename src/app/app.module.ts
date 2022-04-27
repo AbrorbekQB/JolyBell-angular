@@ -23,6 +23,7 @@ import { PurchaseComponent } from './pages/purchase/purchase.component';
 import {BookingComponent} from "./pages/booking/booking.component";
 import { ChoisePaymentComponent } from './pages/choise-payment/choise-payment.component';
 import {NgxPaginationModule} from "ngx-pagination";
+import { TimerComponent } from './parts/timer/timer.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {NgxPaginationModule} from "ngx-pagination";
         CarouselComponent,
         PurchaseComponent,
         BookingComponent,
-        ChoisePaymentComponent
+        ChoisePaymentComponent,
+        TimerComponent
     ],
     imports: [
         NgxPaginationModule,

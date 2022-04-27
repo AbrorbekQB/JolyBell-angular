@@ -1,0 +1,4 @@
+<div class="timer__wrapper">
+  <span *ngIf="second<10">{{minute}}:0{{second}}</span>
+  <span *ngIf="second>=10">{{minute}}:{{second}}</span>
+</div>
