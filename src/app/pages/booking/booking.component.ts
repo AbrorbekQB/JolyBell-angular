@@ -84,7 +84,7 @@ export class BookingComponent implements OnInit {
         this.router.navigate(['/'])
       });
     }
-    this.cartService.updateTotalAmountInCart('')
+    this.cartService.updateTotalAmountInCart(this.orderId)
   }
 
   checkPromoCode() {
@@ -115,7 +115,7 @@ export class BookingComponent implements OnInit {
       } else {
         this.notifyService.showError("Check error!")
       }
-    }, )
+    },)
   }
 
   cancelOrder() {

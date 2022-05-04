@@ -1,0 +1,64 @@
+<div class="category--header">
+  <app-header (updateTotalAmountInCart)="cartService.updateTotalAmountInCart('')"
+              [totalAmount]="cartService.totalAmount"></app-header>
+</div>
+<div class="page--section">
+  <div class="container">
+    <h1 class="section--heading">
+      Choice Payment
+      <app-timer class="timer__item" [orderLifeTime]="orderLifeTime"></app-timer>
+    </h1>
+    <div class="proceed__wrapper">
+      <div class="details__form">
+        <h2>Payment system</h2>
+        <ul class="payment__list">
+          <li class="payment__item" (click)="choicePayment('PaySys')">
+            <img src="/assets/img/payment/paysys.jpg">
+          </li>
+        </ul>
+      </div>
+      <div class="order__wrapper">
+        <h2 *ngIf="orderDetails.fullReserved">Your order</h2>
+        <h2 class="warm__bg" *ngIf="!orderDetails.fullReserved">Your order</h2>
+        <ul class="order__list">
+          <li class="order__item" *ngFor="let order of orderDetails.orderItems">
+            <p class="order__item__name">
+              {{order.name}}
+            </p>
+            <p class="order__item__size">
+              <span class="order__item__title">Size:
+              <span>{{order.size.toUpperCase()}}</span>
+              </span>
+              <span class="order__item__title" *ngIf="order.count == order.reservedCount">Quantity:
+              <span>{{order.count}}</span></span>
+              <span class="order__item__title warm__color" *ngIf="order.count != order.reservedCount"> Quantity:
+                <span class="success__color">{{order.reserverCount}}</span>/<span
+                  class="error__color">{{order.count}}</span></span>
+              <span class="order__item__cost">{{order.cost}} USD</span>
+            </p>
+          </li>
+          <li class="order__item__footer">
+            <p class="order__item__size">
+              <span class="order__item__title">Cost of the items:
+              <span>{{orderDetails.totalAmount}} USD</span>
+              </span>
+              <span class="order__item__title">Delivery cost:
+              <span>5 USD</span></span>
+            </p>
+          </li>
+        </ul>
+        <h2 class="order__wrapper--totalAmount">TOTAL DUE: {{orderDetails.totalAmount + 5}} USD</h2>
+      </div>
+    </div>
+    <!--    <form class="promocode__form" [formGroup]="promocodeForm" (submit)="checkPromoCode()">-->
+    <!--      <label>-->
+    <!--        <span>Promocode:</span>-->
+    <!--        <input type="text" formControlName="code">-->
+    <!--      </label>-->
+    <!--      <button class="black-white__btn" type="submit">-->
+    <!--        Apply-->
+    <!--      </button>-->
+    <!--    </form>-->
+  </div>
+</div>
+<app-footer></app-footer>

@@ -21,9 +21,11 @@ import { AccountComponent } from './pages/account/account.component';
 import { CarouselComponent } from './parts/carousel/carousel.component';
 import { PurchaseComponent } from './pages/purchase/purchase.component';
 import {BookingComponent} from "./pages/booking/booking.component";
-import { ChoisePaymentComponent } from './pages/choise-payment/choise-payment.component';
+import { ChoicePaymentComponent } from './pages/choise-payment/choice-payment.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import { TimerComponent } from './parts/timer/timer.component';
+import { PaysysComponent } from './pages/paysys/paysys.component';
+import { YourOrdersComponent } from './pages/your-orders/your-orders.component';
 
 
 @NgModule({
@@ -42,8 +44,10 @@ import { TimerComponent } from './parts/timer/timer.component';
         CarouselComponent,
         PurchaseComponent,
         BookingComponent,
-        ChoisePaymentComponent,
-        TimerComponent
+        ChoicePaymentComponent,
+        TimerComponent,
+        PaysysComponent,
+        YourOrdersComponent
     ],
     imports: [
         NgxPaginationModule,

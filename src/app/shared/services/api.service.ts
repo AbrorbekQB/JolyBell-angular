@@ -89,6 +89,14 @@ export class ApiService {
       {responseType: 'text'})
   }
 
+
+  choicePayment(orderId: string, type: string) {
+    return this.http.post(`${this.url}/order/choice-payment`, {
+      orderId: orderId,
+      type: type
+    })
+  }
+
   // product
   getProductsListApi(category: string): Observable<any> {
     return this.http.get(this.url + '/product/list/' + category)
@@ -252,5 +260,15 @@ export class ApiService {
 
   getProductById(id: string): Observable<any> {
     return this.http.get(`${this.url}/admin/product/get/${id}`)
+  }
+
+  payOrder(orderId: string, value: any) {
+    return this.http.post(`${this.url}/paysys/pay`, {
+      orderId: orderId,
+      cardHolderName: value.cardHolderName,
+      cardNumber: value.cardNumber,
+      cardExpire: value.cardExpire,
+      cardCvc: value.cardCvc
+    })
   }
 }

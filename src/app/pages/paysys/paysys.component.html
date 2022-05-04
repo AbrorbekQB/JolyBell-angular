@@ -1,0 +1,47 @@
+<div class="category--header">
+  <app-header (updateTotalAmountInCart)="cartService.updateTotalAmountInCart(orderId)"
+              [totalAmount]="cartService.totalAmount"></app-header>
+</div>
+
+<div class="page--section">
+  <div class="container">
+    <h1 class="section--heading">
+      PaySys
+    </h1>
+    <div class="payment__wrapper">
+      <div class="payment__header">
+        <img src="assets/img/payment/paysysLogo.png" alt="paysys logo">
+
+        <app-timer class="timer__item" [orderLifeTime]="orderLifeTime"></app-timer>
+      </div>
+      <form class="payment__content" [formGroup]="payForm" (submit)="payOrder()">
+        <div class="payment__info">
+          <p class="text-2">Total Due: <span>  {{orderDetails.totalAmount + 5}} USD</span></p>
+          <p class="text">Cost of the items: <span> {{orderDetails.totalAmount}} USD</span></p>
+          <p class="text">Delivery cost: <span>  5 USD</span></p>
+        </div>
+        <div class="payment__card__details">
+          <label>Card holder name</label>
+          <input type="text" placeholder="Card holder name"
+          formControlName="cardHolderName">
+          <label>Card Number</label>
+          <input type="text"
+          formControlName="cardNumber">
+          <div class="wrapper">
+            <div class="wrapper__left">
+              <label>Expired Date</label>
+              <input type="text" formControlName="cardExpire">
+            </div>
+            <div class="wrapper__right">
+              <label>CVC</label>
+              <input type="text" formControlName="cardCvc">
+            </div>
+          </div>
+        </div>
+        <button class="paid__btn" type="submit">Pay</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

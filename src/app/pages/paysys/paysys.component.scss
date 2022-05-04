@@ -1,0 +1,101 @@
+.payment__wrapper {
+  width: 700px;
+  margin: 0 auto;
+  box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+  padding: 30px;
+  border-radius: 16px;
+}
+
+.payment__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+
+  img {
+    height: 54px;
+  }
+}
+
+.payment__content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: rgba(87, 84, 84, 0.89);
+}
+
+.payment__info {
+  width: 40%;
+  background-color: rgba(187, 199, 197, 0.31);
+  border-radius: 4px;
+  padding: 10px 20px;
+}
+
+.text {
+  margin-bottom: 10px;
+
+  span {
+    color: black;
+    font-weight: 500;
+  }
+}
+
+.text-2 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+
+  span {
+    color: black;
+    font-weight: 500;
+  }
+}
+
+.payment__card__details {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wrapper__right, .wrapper__left {
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+}
+
+.paid__btn {
+  width: 300px;
+  margin: 0 auto;
+  padding: 6px 16px;
+  border: 2px solid rgba(44, 103, 147, 0.87);
+  border-radius: 4px;
+  color: white;
+  background-color: rgba(44, 103, 147, 0.87);
+  font-weight: 500;
+  font-size: 18px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #fff;
+    color: rgba(44, 103, 147, 0.87);
+  }
+}
+
+input {
+  padding: 6px 16px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(87, 84, 84, 0.89);
+  border-radius: 4px;
+}
+
+label {
+  margin-bottom: 10px;
+}

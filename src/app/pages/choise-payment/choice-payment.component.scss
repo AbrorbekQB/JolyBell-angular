@@ -33,6 +33,10 @@
   }
 }
 
+.section--heading {
+  position: relative;
+}
+
 .page--section {
   width: 70%;
   margin: 0 auto;
@@ -121,7 +125,6 @@ h2 {
 .payment__item {
   width: 120px;
   height: 120px;
-  background-color: #F4F6F8;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -130,13 +133,21 @@ h2 {
   cursor: pointer;
   transition: all 0.2s ease;
   margin-right: 15px;
+  overflow: hidden;
+  border: 1px solid rgba(87, 98, 88, 0.55);
 
   &:hover {
-    background-color: #cacbd0;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   }
 
   img {
     width: 80%;
     height: auto;
   }
+}
+
+.timer__item {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
