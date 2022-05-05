@@ -1,1 +1,61 @@
-<p>your-orders works!</p>
+<div class="category--header">
+  <app-header (updateTotalAmountInCart)="cartService.updateTotalAmountInCart('')"
+              [totalAmount]="cartService.totalAmount"></app-header>
+</div>
+
+<section class="page--section">
+  <div class="container">
+    <h1 class="section--heading">
+      YOUR ORDERS
+    </h1>
+    <div class="order__content">
+      <div class="table__wrapper">
+        <table class="order__table">
+          <thead>
+          <tr>
+            <th>OrderId</th>
+            <th>Products</th>
+            <th>Booked Date</th>
+            <th>State</th>
+            <th>Total amount</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let order of orderList">
+            <td>{{order.id}}</td>
+            <td>
+              <table class="product__table">
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Size</th>
+                  <th>Count</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of order.orderItems">
+                  <td>{{item.name}}</td>
+                  <td>{{item.size.toUpperCase()}}</td>
+                  <td>{{item.reservedCount}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </td>
+            <td>
+              {{order.createdDate}}
+            </td>
+            <td>
+              {{order.state}}
+            </td>
+            <td>
+              {{order.totalAmount}} $
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

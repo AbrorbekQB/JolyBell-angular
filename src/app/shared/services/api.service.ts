@@ -57,6 +57,10 @@ export class ApiService {
     })
   }
 
+  getOrderList(): Observable<any> {
+    return this.http.get(`${this.url}/order/list`)
+  }
+
   removeOrderItem(removeData: any): Observable<any> {
     return this.http.post(`${this.url}/order/remove/item`, removeData)
   }

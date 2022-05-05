@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./timer.component.scss']
 })
 export class TimerComponent implements OnInit {
-  @Input() public orderLifeTime: number = 300
+  @Input() public orderLifeTime: number = 600
 
   public minute: number = 5
   public second: number = 0
