@@ -273,6 +273,13 @@ export class ApiService {
     return this.http.get(`${this.url}/admin/product/get/${id}`)
   }
 
+
+  editProduct(param: any) {
+    return this.http.post(`${this.url}/admin/product/edit`, param)
+  }
+
+  // payment
+
   payOrder(orderId: string, value: any) {
     return this.http.post(`${this.url}/paysys/pay`, {
       orderId: orderId,

@@ -75,17 +75,19 @@
 .admin__form--item__wrapper {
   display: flex;
   justify-content: space-between;
+
+  .admin__form--item {
+    &:nth-child(1),
+    &:nth-child(2) {
+      width: 45%;
+    }
+  }
 }
 
 .admin__form--item {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
-
-  &:nth-child(1),
-  &:nth-child(2) {
-    width: 45%;
-  }
 }
 
 textarea {

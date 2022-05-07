@@ -43,7 +43,7 @@ export class ProductComponent implements OnInit {
   })
 
   public editProductForm = new FormGroup({
-    images: new FormControl(''),
+    // images: new FormControl(''),
     name: new FormControl(this.productDetails.name),
     cost: new FormControl(''),
     advice: new FormControl(),
@@ -96,12 +96,19 @@ export class ProductComponent implements OnInit {
             description += des.text + "\n";
           })
           this.productDetails.descriptionItems = description.trim()
+
+          this.editProductForm.setValue({
+            name: this.productDetails.name,
+            cost: this.productDetails.cost,
+            advice: this.productDetails.advice,
+            description: this.productDetails.descriptionItems,
+          })
         });
+        document.body.style.overflow = 'hidden'
         this.componentState = 'editProduct'
         break
       }
       case 'editProduct': {
-        document.body.style.overflow = 'hidden'
         break
       }
     }
@@ -117,9 +124,7 @@ export class ProductComponent implements OnInit {
     this.images = []
     for (let i = 0; i < event.target.files.length; i++) {
       this.images.push(event.target.files[i])
-      console.log(event.target.files[i].path)
     }
-    console.log(this.images)
   }
 
   createProductBtn() {
@@ -187,6 +192,29 @@ export class ProductComponent implements OnInit {
 
   // edit product
   editProductBtn(id: string) {
-    console.log(this.editProductForm.value)
+    this.apiService.editProduct({
+      id: id,
+      name: this.editProductForm.value.name,
+      cost: this.editProductForm.value.cost,
+      advice: this.editProductForm.value.advice,
+      descriptionItems: this.editProductForm.value.description.split(/\r?\n/),
+      imageItems: this.productDetails.imageItems
+    }).subscribe(res => {
+      this.notifyService.showSuccess("Successfully update!")
+      this.updateProductList(this.searchCategoryFrom.value.search)
+      this.closeModal()
+    }, () => {
+      this.notifyService.showError("Error updating!")
+    })
+  }
+
+  removeImage(id: string) {
+    let resultImages = []
+    for (let index in this.productDetails.imageItems) {
+      if (this.productDetails.imageItems[index].id != id) {
+        resultImages.push(this.productDetails.imageItems[index])
+      }
+    }
+    this.productDetails.imageItems = resultImages
   }
 }
