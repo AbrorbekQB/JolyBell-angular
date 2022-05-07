@@ -31,8 +31,15 @@ export class ApiService {
   }
 
   forgot(username: string): Observable<any> {
-    return this.http.post(this.url + '/auth/forgot', {
+    return this.http.post(this.url + '/user/forgot/password', {
       username
+    })
+  }
+
+  verifyForgot(confirmCode: string, password: string) {
+    return this.http.post(this.url + '/user/verify/password', {
+      confirmCode,
+      password
     })
   }
 

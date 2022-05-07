@@ -75,7 +75,7 @@
               <div class="close__btn" (click)="closeModal()">
                 <div class="inside"></div>
               </div>
-              <form *ngIf="forgotPassword" [formGroup]="formForgot" class="forgot-password-form">
+              <form *ngIf="forgotPassword" [formGroup]="formForgot" class="forgot-password-form" (submit)="forgot()">
                 <h2>Password recovery</h2>
                 <p>Enter your email and we will send you a link to reset your password</p>
                 <label for="forgot-username__input">Email address</label>
@@ -92,7 +92,7 @@
                                         must be
                                         email</span>
                 </ng-container>
-                <button class="forgot-password-btn" type="submit" (click)="forgot()"
+                <button class="forgot-password-btn" type="submit"
                         [disabled]="formForgot.invalid">
                   RECOVER Password
                 </button>

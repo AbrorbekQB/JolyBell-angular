@@ -73,12 +73,11 @@ export class HeaderComponent implements OnInit {
   registration() {
     this.apiService.registration(this.signupFrom.value.username, this.signupFrom.value.password)
       .subscribe(res => {
-        console.log(res)
+        this.notifyService.showSuccess("Successfully created user and sent code to your email!")
         this.closeModal()
       }, error => {
-
+        this.notifyService.showError("User creation error!")
       })
-    console.log(this.signupFrom.value.username, this.signupFrom.value.password)
   }
 
   forgotPopupOpen() {
@@ -97,12 +96,14 @@ export class HeaderComponent implements OnInit {
   }
 
   forgot() {
+    this.forgotPassword = false
     this.apiService.forgot(this.formForgot.value.username)
       .subscribe(res => {
+        this.notifyService.showSuccess("Sent code to " + this.formForgot.value.username)
+        localStorage.setItem("verify", "verify")
         this.closeModal()
-        this.forgotPassword = false
       }, err => {
-
+        this.notifyService.showError("Sent code error!");
       })
   }
 

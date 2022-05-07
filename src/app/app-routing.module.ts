@@ -11,6 +11,7 @@ import {BookingComponent} from "./pages/booking/booking.component";
 import {ChoicePaymentComponent} from "./pages/choise-payment/choice-payment.component";
 import {PaysysComponent} from "./pages/paysys/paysys.component";
 import {YourOrdersComponent} from "./pages/your-orders/your-orders.component";
+import {VerifyComponent} from "./pages/verify/verify.component";
 
 const routes: Routes = [{
   path: '',
@@ -45,6 +46,9 @@ const routes: Routes = [{
 }, {
   path: 'your-orders',
   component: YourOrdersComponent
+}, {
+  path: 'verify-user',
+  component: VerifyComponent
 }, {
   path: 'admin',
   loadChildren: () => import('./admin/admin.module').then(module => module.AdminModule),

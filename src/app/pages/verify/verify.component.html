@@ -1,0 +1,66 @@
+<div class="verify__modal">
+  <div class="popup-layer"></div>
+  <form [formGroup]="verifyUserForm" class="verify-form">
+    <h2 class="verify__heading">Verify user</h2>
+    <label for="verify-user__code">VERIFY CODE</label>
+    <input type="email" id="verify-user__code" formControlName="confirmCode"
+           [ngClass]="{
+                   'error':verifyUserForm.controls['confirmCode'].touched
+                   && verifyUserForm.controls['confirmCode'].errors
+                   }">
+    <ng-container
+      *ngIf="verifyUserForm.controls['confirmCode'].touched && verifyUserForm.controls['confirmCode'].errors">
+                                    <span style="color: red;"
+                                          *ngIf="verifyUserForm.controls['confirmCode'].errors['required']">Code is
+                                        required</span>
+      <span style="color: red;" *ngIf="verifyUserForm.controls['confirmCode'].errors['minlength']">Must
+                                        be 6 chart at
+                                        least</span>
+      <span style="color: red;" *ngIf="verifyUserForm.controls['confirmCode'].errors['maxLength']">Must
+                                        be 6 chart at
+                                        greatest</span>
+    </ng-container>
+    <label for="sign-up-password">NEW PASSWORD</label>
+    <input type="password" id="sign-up-password" formControlName="password" [ngClass]="{
+                                    'error': verifyUserForm.controls['password'].touched && verifyUserForm.controls['password'].errors
+                                }">
+    <ng-container
+      *ngIf="verifyUserForm.controls['password'].touched && verifyUserForm.controls['password'].errors">
+                                    <span style="color: red;"
+                                          *ngIf="verifyUserForm.controls['password'].errors['required']">Password is
+                                        required</span>
+      <span style="color: red;" *ngIf="verifyUserForm.controls['password'].errors['minlength']">Must
+                                        be 8 chart at
+                                        least</span>
+    </ng-container>
+    <label for="verify-repeat-password">REPEAT PASSWORD</label>
+    <input type="password" id="verify-repeat-password" formControlName="repeatPassword" [ngClass]="{
+                                    'error': verifyUserForm.controls['repeatPassword'].touched && (verifyUserForm.controls['repeatPassword'].errors
+                                    || verifyUserForm.controls['password'].value != verifyUserForm.controls['repeatPassword'].value)
+                                }">
+    <ng-container
+      *ngIf="verifyUserForm.controls['repeatPassword'].touched && verifyUserForm.controls['repeatPassword'].errors
+                && !verifyUserForm.controls['password'].value != verifyUserForm.controls['repeatPassword'].value">
+                                    <span style="color: red;"
+                                          *ngIf="verifyUserForm.controls['repeatPassword'].errors['required']">Password is
+                                        required</span>
+      <span style="color: red;" *ngIf=" verifyUserForm.controls['repeatPassword'].errors['minlength']">Must
+                                        be 8 chart at
+                                        least</span>
+    </ng-container>
+    <ng-container
+      *ngIf="verifyUserForm.controls['repeatPassword'].touched
+              && verifyUserForm.controls['repeatPassword'].errors
+              && !verifyUserForm.controls['repeatPassword'].errors['minlength']
+              && verifyUserForm.controls['password'].value != verifyUserForm.controls['repeatPassword'].value">
+                            <span style="color: red"
+                                  *ngIf="verifyUserForm.controls['password'].value != verifyUserForm.controls['repeatPassword'].value">
+                Repeat Password doesn't match Password
+              </span>
+    </ng-container>
+    <div class="row">
+      <button class="btn success__btn verify__btn" type="submit" [disabled]="verifyUserForm.invalid" (click)="verifyUserFunc()">VERIFY</button>
+      <button class="btn cancel__btn" (click)="returnHomePage()">CANCEL</button>
+    </div>
+  </form>
+</div>

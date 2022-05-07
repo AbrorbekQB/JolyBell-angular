@@ -26,6 +26,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import { TimerComponent } from './parts/timer/timer.component';
 import { PaysysComponent } from './pages/paysys/paysys.component';
 import { YourOrdersComponent } from './pages/your-orders/your-orders.component';
+import { VerifyComponent } from './pages/verify/verify.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { YourOrdersComponent } from './pages/your-orders/your-orders.component';
         ChoicePaymentComponent,
         TimerComponent,
         PaysysComponent,
-        YourOrdersComponent
+        YourOrdersComponent,
+        VerifyComponent
     ],
     imports: [
         NgxPaginationModule,
