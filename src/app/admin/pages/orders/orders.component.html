@@ -7,42 +7,53 @@
     <div class="section--right">
       <div class="order_wrapper">
         <div class="filter__wrapper">
-          <form class="filter__form">
+          <form class="filter__form" (submit)="updateTable()" [formGroup]="filterForm">
             <div class="filter__item">
               <label>From</label>
-              <input class="input--admin" type="date">
+              <input class="input--admin" type="date" value="{{dateBeforeMonth}}" formControlName="dateTo">
             </div>
             <div class="filter__item">
               <label>To</label>
-              <input class="input--admin" type="date">
+              <input class="input--admin" type="date" value="{{now}}" formControlName="dateFrom">
             </div>
             <div class="filter__item">
               <label>Status</label>
-              <select class="input--admin filter__dropdown">
-                <option value="paid" selected>Paid</option>
-                <option value="checkout">Checkout</option>
+              <select class="input--admin filter__dropdown" formControlName="status">
+                <option value="ALL">ALL</option>
+                <option value="PENDING">PENDING</option>
+                <option value="CONFIRM">CONFIRM</option>
+                <option value="CHECKOUT">CHECKOUT</option>
+                <option value="CANCELED">CANCELED</option>
+                <option value="PAID">PAID</option>
+                <option value="CANCELED_BY_EXPIRED">CANCELED_BY_EXPIRED</option>
+                <option value="CHOICE_PAYMENT">CHOICE_PAYMENT</option>
+                <option value="PAY_SUCCESS" selected>PAY_SUCCESS</option>
+                <option value="PAY_FAIL">PAY_FAIL</option>
               </select>
             </div>
             <div class="filter__item">
               <label>State</label>
-              <select class="input--admin filter__dropdown">
-                <option value="paid" selected>Paid</option>
-                <option value="accept">Accept</option>
+              <select class="input--admin filter__dropdown" formControlName="state">
+                <option value="ALL" selected>ALL</option>
+                <option value="USER_FINISH">USER_FINISH</option>
+                <option value="PENDING">PENDING</option>
+                <option value="WAREHOUSE">WAREHOUSE</option>
+                <option value="SUPPLIER">SUPPLIER</option>
               </select>
             </div>
             <div class="filter__item">
               <label>Province</label>
-              <select class="input--admin filter__dropdown">
-                <option value="paid" selected>Tashkent</option>
-                <option value="checkout">Checkout</option>
+              <select class="input--admin filter__dropdown" formControlName="province">
+                <option value="ALL" selected>ALL</option>
+                <option value="{{province.id}}" *ngFor="let province of provinceList">{{province.name}}</option>
               </select>
             </div>
             <button class="info-btn--admin" type="submit">Filter</button>
           </form>
-          <form class="search__form">
+          <form class="search__form" [formGroup]="searchForm">
             <div class="filter__item">
               <label>Search</label>
-              <input class="input--admin" type="text">
+              <input class="input--admin" type="text" (keyup)="search()" formControlName="search">
             </div>
           </form>
         </div>
@@ -52,7 +63,7 @@
             <table class="order__table">
               <thead>
               <tr>
-                <th>OrderId</th>
+                <th style="width: 100px">OrderId</th>
                 <th>Products</th>
                 <th>Created Date</th>
                 <th>Status</th>
@@ -66,8 +77,12 @@
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>a5b8d3b2-bc29-400d-8261-e47df2e337b1</td>
+              <tr *ngFor="let order of orders.data| paginate: {
+              itemsPerPage: 10,
+              currentPage: orders.pages,
+              totalItems: orders.totalCount
+              }">
+                <td>{{order.id}}</td>
                 <td>
                   <table class="product__table">
                     <thead>
@@ -78,52 +93,52 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                      <td>Ko'ylak</td>
-                      <td>S</td>
-                      <td>5</td>
+                    <tr *ngFor="let orderItem of order.orderItems">
+                      <td>{{orderItem.name}}</td>
+                      <td>{{orderItem.size.toUpperCase()}}</td>
+                      <td>{{orderItem.count}}</td>
                     </tr>
                     </tbody>
                   </table>
                 </td>
                 <td>
-                  09.04.2022 12:58
+                  {{order.createdDate}}
                 </td>
                 <td>
-                  PAID
+                  {{order.status}}
                 </td>
                 <td>
-                  PAID
+                  {{order.state}}
                 </td>
                 <td>
-                  TASHKENT
+                  {{order.province}}
                 </td>
                 <td>
-                  30 $
+                  {{order.totalAmount}} $
                 </td>
                 <td>
-                  <button class="btn success__btn">ACCEPT</button>
+                  <button class="btn success__btn"
+                          [ngClass]="{'orange-color': order.state == 'WAREHOUSE', 'blue-color':order.state == 'SUPPLIER'}"
+                          [disabled]="order.state == 'FINISHED'" (click)="accept(order.id)">
+                    ACCEPT
+                  </button>
                 </td>
                 <td>
-                  abrorbekgreen497@gmail.com
+                  {{order.email}}
                 </td>
                 <td>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus nesciunt provident quo suscipit
-                  vero.
-                  Ad alias distinctio minus modi nam nesciunt possimus recusandae suscipit. Atque illum nemo pariatur
-                  quam
-                  voluptas?
+                  {{order.address}}
                 </td>
                 <td>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi illum maxime quas! Asperiores
-                  consequuntur doloremque doloribus esse fugiat, id illum minima nobis, quasi repudiandae sit temporibus
-                  totam, voluptatum? Commodi, excepturi.
+                  {{order.note}}
                 </td>
               </tr>
               </tbody>
             </table>
           </div>
         </div>
+        <pagination-controls class="pagination-controls"
+                             (pageChange)="page = $event; updateTable()"></pagination-controls>
       </div>
     </div>
   </div>

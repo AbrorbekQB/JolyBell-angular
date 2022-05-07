@@ -289,4 +289,16 @@ export class ApiService {
       cardCvc: value.cardCvc
     })
   }
+
+  // order
+  getOrderListByAdmin(filter: any, page: number): Observable<any> {
+    return this.http.post(this.url + '/admin/order/list', {
+      "page": page,
+      "filterData": filter
+    })
+  }
+
+  acceptOrder(id: string) {
+    return this.http.get(`${this.url}/admin/order/accept/${id}`)
+  }
 }

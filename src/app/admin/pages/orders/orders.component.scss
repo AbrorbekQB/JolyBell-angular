@@ -46,7 +46,7 @@
 }
 
 .filter__dropdown {
-  width: 120px;
+  width: 140px;
 }
 
 .search__form {
@@ -104,4 +104,31 @@ table {
 
 .order__table {
   min-width: 1600px;
+}
+
+.orange-color {
+  background-color: orange;
+  border-color: orange;
+
+  &:hover {
+    background-color: #fff;
+    color: orange;
+  }
+}
+
+.blue-color {
+  background-color: #0d2242;
+  border-color: #0d2242;
+
+  &:hover {
+    background-color: #fff;
+    color: #0d2242;
+  }
+}
+
+button:disabled {
+  color: white;
+  background-color: rgba(56, 54, 54, 0.53);
+  border-color: rgba(56, 54, 54, 0.53);
+  cursor: default;
 }
