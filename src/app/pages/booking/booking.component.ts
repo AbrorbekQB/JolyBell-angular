@@ -108,7 +108,8 @@ export class BookingComponent implements OnInit {
 
   checkout() {
     this.receiverDetailsObject.note = this.receiverDetailsForm.value.note
-    this.apiService.checkout(this.receiverDetailsObject).subscribe(res => {
+    // console.log(this.receiverDetailsForm.value)
+    this.apiService.checkout(this.receiverDetailsForm.value).subscribe(res => {
       if (res == 'true') {
         this.notifyService.showSuccess("Successfully checked")
         this.router.navigate(['/booking/choice-payment']).then()

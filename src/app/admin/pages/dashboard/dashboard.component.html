@@ -5,7 +5,56 @@
       <app-sidebar></app-sidebar>
     </div>
     <div class="section--right">
-      <p>dashboard works!</p>
+      <ul class="dashboard__list">
+        <li class="dashboard__item">
+          <div class="dashboard__item-left">
+            <img src="/assets/img/customer.png" alt="customer image">
+          </div>
+          <div class="dashboard__item-right">
+            <h4>Users</h4>
+            <p>all: {{userReports.userCount.all}}</p>
+            <p>active: {{userReports.userCount.active}}</p>
+            <p>inactive: {{userReports.userCount.inactive}}</p>
+          </div>
+        </li>
+        <li class="dashboard__item">
+          <div class="dashboard__item-left">
+            <img src="/assets/img/shopping.png" alt="customer image">
+          </div>
+          <div class="dashboard__item-right">
+            <h4>Orders</h4>
+            <p>user finish: {{orderReports.userFinish}}</p>
+            <p>warehouse: {{orderReports.warehouse}}</p>
+            <p>supplier: {{orderReports.supplier}}</p>
+            <p>finished: {{orderReports.finished}}</p>
+          </div>
+        </li>
+        <li class="dashboard__item">
+          <div class="dashboard__item-left">
+            <img src="/assets/img/dollar.png" alt="customer image">
+          </div>
+          <div class="dashboard__item-right">
+            <h4>Money</h4>
+            <p>total amount: {{orderReports.moneyDaily.totalAmount}} $</p>
+          </div>
+        </li>
+      </ul>
+      <div class="dashboard__header">
+        <div class="dashboard__header--inner">
+          <canvas id="usersChart" class="report__user"></canvas>
+        </div>
+        <div class="dashboard__header--inner">
+          <canvas id="ordersChart" class="report__user"></canvas>
+        </div>
+        <div class="dashboard__header--inner">
+          <canvas id="moneyChart" class="report__user"></canvas>
+        </div>
+        <div class="dashboard__header--inner">
+          <div class="doughnut">
+            <canvas id="provinceChart" class="report__user" style="height: 200px!important;"></canvas>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

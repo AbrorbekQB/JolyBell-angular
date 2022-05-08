@@ -92,7 +92,7 @@ export class ApiService {
           "surname": data.surname,
           "district": data.district,
           "name": data.name,
-          "email": data.email,
+          "username": data.email,
         },
         note: data.note,
         orderId: localStorage.getItem('orderId')
@@ -300,5 +300,14 @@ export class ApiService {
 
   acceptOrder(id: string) {
     return this.http.get(`${this.url}/admin/order/accept/${id}`)
+  }
+
+  // Dashboard
+  dashboardUser() {
+    return this.http.get(`${this.url}/admin/dashboard/user`)
+  }
+
+  dashboardOrder() {
+    return this.http.get(`${this.url}/admin/dashboard/order`)
   }
 }
