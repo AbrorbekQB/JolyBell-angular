@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {Router} from "@angular/router";
 import {ApiService} from "../../../shared/services/api.service";
 import {NotificationService} from "../../../shared/services/notification.service";
 import {FormControl, FormGroup} from "@angular/forms";
+import {JwtHelperService} from "@auth0/angular-jwt";
+import {Utils} from "../../../shared/services/Utils";
 
 @Component({
   selector: 'app-orders',
@@ -33,13 +35,16 @@ export class OrdersComponent implements OnInit {
   })
 
   constructor(
-    private route: ActivatedRoute,
+    private router: Router,
     private apiService: ApiService,
-    private notifyService: NotificationService
+    private notifyService: NotificationService,
+    private jwtHelper: JwtHelperService,
+    private utils: Utils
   ) {
   }
 
   ngOnInit(): void {
+    this.utils.checkAuthenticated()
     this.updateTable()
     this.apiService.provinceList().subscribe(res => {
       this.provinceList = res
@@ -70,7 +75,7 @@ export class OrdersComponent implements OnInit {
     this.apiService.acceptOrder(id).subscribe(res => {
       this.notifyService.showSuccess("Successfully accepted!")
       this.updateTable()
-    }, ()=>{
+    }, () => {
       this.notifyService.showError("Error accepting!")
     })
   }

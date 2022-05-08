@@ -28,6 +28,7 @@ import {PaysysComponent} from './pages/paysys/paysys.component';
 import {YourOrdersComponent} from './pages/your-orders/your-orders.component';
 import {VerifyComponent} from './pages/verify/verify.component';
 import {NgChartsModule} from "ng2-charts";
+import {JWT_OPTIONS, JwtHelperService} from "@auth0/angular-jwt";
 
 
 @NgModule({
@@ -67,7 +68,13 @@ import {NgChartsModule} from "ng2-charts";
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }],
+  },
+    {
+      provide: JWT_OPTIONS,
+      useValue: JWT_OPTIONS
+    },
+    JwtHelperService
+  ],
   exports: [
     CarouselComponent
   ],

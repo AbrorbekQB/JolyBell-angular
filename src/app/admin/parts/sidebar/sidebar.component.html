@@ -11,7 +11,7 @@
     </li>
 
     <li class="menu__item menu__item--user" routerLink="/admin/users" routerLinkActive="menu--active"
-        (click)="changeActiveRoute('userList')">
+        (click)="changeActiveRoute('userList')" *ngIf="roles.indexOf('ROLE_SUPER_ADMIN')>-1">
       <img src="assets/img/admin/dashboard.png">
       <p class="menu__item--title">Users</p>
     </li>

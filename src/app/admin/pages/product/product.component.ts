@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {Router} from "@angular/router";
 import {ApiService} from "../../../shared/services/api.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {NotificationService} from "../../../shared/services/notification.service";
+import {JwtHelperService} from "@auth0/angular-jwt";
+import {Utils} from "../../../shared/services/Utils";
 
 interface ImageUploadModel {
   Title: string;
@@ -58,13 +60,16 @@ export class ProductComponent implements OnInit {
     count: new FormControl(0)
   })
 
-  constructor(private route: ActivatedRoute,
+  constructor(private router: Router,
               private apiService: ApiService,
-              private notifyService: NotificationService) {
+              private notifyService: NotificationService,
+              private jwtHelper: JwtHelperService,
+              private utils: Utils) {
   }
 
 
   ngOnInit(): void {
+    this.utils.checkAuthenticated()
     this.updateProductList(this.searchCategoryFrom.value.search)
   }
 

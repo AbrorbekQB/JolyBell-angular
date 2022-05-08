@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {Router} from "@angular/router";
 import {ApiService} from "../../../shared/services/api.service";
 import {NotificationService} from "../../../shared/services/notification.service";
 import {FormControl, FormGroup} from "@angular/forms";
+import {JwtHelperService} from "@auth0/angular-jwt";
+import {Utils} from "../../../shared/services/Utils";
 
 @Component({
   selector: 'app-category',
@@ -40,12 +42,15 @@ export class CategoryComponent implements OnInit {
 
   public activeRoute: string = ""
 
-  constructor(private route: ActivatedRoute,
+  constructor(private router: Router,
               private apiService: ApiService,
-              private notifyService: NotificationService) {
+              private notifyService: NotificationService,
+              private jwtHelper: JwtHelperService,
+              private utils: Utils) {
   }
 
   ngOnInit(): void {
+    this.utils.checkAuthenticated()
     this.updateCategoryTable("")
   }
 

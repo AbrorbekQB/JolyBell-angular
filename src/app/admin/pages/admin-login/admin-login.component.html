@@ -1,7 +1,7 @@
 <section class="login__section">
   <div class="container">
     <div class="login__wrapper">
-      <form class="login__form">
+      <form class="login__form" [formGroup]="loginForm" (submit)="login()">
         <h2 class="login__heading">Sign up</h2>
         <label for="sign-up-email">EMAIL ADDRESS</label>
         <input type="email" id="sign-up-email" formControlName="username">

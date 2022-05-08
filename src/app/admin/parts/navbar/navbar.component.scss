@@ -41,8 +41,30 @@ nav {
 .profile-img {
   height: 36px;
   width: 36px;
+  margin-right: 20px;
+
   img {
     height: 36px;
     cursor: pointer;
+  }
+}
+
+.exit-profile {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  img {
+    height: 28px;
+    padding: 2px;
+    cursor: pointer;
+  }
+
+  &:hover {
+    border: 1px solid red;
+    border-radius: 50%;
   }
 }

@@ -5,11 +5,14 @@
         <img src="assets/img/logo1.png">
       </div>
       <div class="profile-info">
-        <h4>Username</h4>
-        <p>Role</p>
+        <h4>{{userDetails.sub}}</h4>
+        <p>{{userDetails.roles.join(", ")}}</p>
       </div>
       <div class="profile-img">
         <img src="assets/img/profile/profile.png" alt="profile icon">
+      </div>
+      <div class="exit-profile">
+        <img src="assets/img/exit.png" alt="profile icon" (click)="exit()">
       </div>
     </div>
   </div>

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {ApiService} from "../../../shared/services/api.service";
+import {JwtHelperService} from "@auth0/angular-jwt";
+import {Utils} from "../../../shared/services/Utils";
 
 @Component({
   selector: 'app-users',
@@ -14,11 +16,14 @@ export class UsersComponent implements OnInit {
 
   public activeRoute: string = ""
 
-  constructor(private route: ActivatedRoute,
-              private apiService: ApiService) {
+  constructor(private router: Router,
+              private apiService: ApiService,
+              private jwtHelper: JwtHelperService,
+              private utils: Utils) {
   }
 
   ngOnInit(): void {
+    this.utils.checkAuthenticated()
     this.apiService.getAllUser().subscribe(res => {
       this.userList = res
       console.log(res)

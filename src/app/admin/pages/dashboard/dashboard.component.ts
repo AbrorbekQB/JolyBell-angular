@@ -3,6 +3,8 @@ import {Chart} from "chart.js";
 import {ApiService} from "../../../shared/services/api.service";
 import {Router} from "@angular/router";
 import {NotificationService} from "../../../shared/services/notification.service";
+import {JwtHelperService} from "@auth0/angular-jwt";
+import {Utils} from "../../../shared/services/Utils";
 
 @Component({
   selector: 'app-dashboard',
@@ -15,16 +17,26 @@ export class DashboardComponent implements OnInit {
     userCount: {},
     userDaily: {}
   }
-  public orderReports: any;
+  public orderReports: any = {
+    finished: "",
+    moneyDaily: {},
+    orderDaily: {},
+    provinceDaily: {data: [], name: []},
+    supplier: "",
+    userFinish: "",
+    warehouse: ""
+  }
 
   constructor(private apiService: ApiService,
               private router: Router,
-              private notifyService: NotificationService) {
+              private notifyService: NotificationService,
+              private jwtHelper: JwtHelperService,
+              private utils: Utils) {
   }
 
   ngOnInit(): void {
+    this.utils.checkAuthenticated()
     this.apiService.dashboardUser().subscribe(res => {
-      console.log(res)
       this.userReports = res
 
       let usersChart = new Chart("usersChart", {
@@ -55,7 +67,6 @@ export class DashboardComponent implements OnInit {
     })
 
     this.apiService.dashboardOrder().subscribe(res => {
-      console.log(res)
       this.orderReports = res;
 
       let ordersChart = new Chart("ordersChart", {
