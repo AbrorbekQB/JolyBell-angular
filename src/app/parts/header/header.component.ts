@@ -3,6 +3,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ApiService} from 'src/app/shared/services/api.service';
 import {NotificationService} from "../../shared/services/notification.service";
+import {Utils} from "../../shared/services/Utils";
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 @Component({
   selector: 'app-header',
@@ -15,6 +17,7 @@ export class HeaderComponent implements OnInit {
   @Input() public totalAmount: string = "0"
 
   public categoryList: Array<any> = []
+  public userDetails: any
   public profilePopupShow = false
   public signupShow = false
   public forgotPassword = false
@@ -34,11 +37,16 @@ export class HeaderComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private notifyService: NotificationService
+    private notifyService: NotificationService,
+    private utils: Utils,
+    private jwtHelper: JwtHelperService
   ) {
   }
 
   ngOnInit(): void {
+    // @ts-ignore
+    if (localStorage.getItem("Authorization") && !this.jwtHelper.isTokenExpired(localStorage.getItem("Authorization")))
+      this.userDetails = this.utils.getUser()
     this.apiService.getCategoryList().subscribe(res => {
       // console.log(res);
 
@@ -65,6 +73,9 @@ export class HeaderComponent implements OnInit {
       .subscribe(res => {
         this.closeModal()
         localStorage.setItem('Authorization', res.Authorization)
+        // @ts-ignore
+        if (localStorage.getItem("Authorization") && !this.jwtHelper.isTokenExpired(localStorage.getItem("Authorization")))
+          this.userDetails = this.utils.getUser()
       }, err => {
         this.notifyService.showError("Username or password invalid")
       })

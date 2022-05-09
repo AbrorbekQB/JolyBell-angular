@@ -8,7 +8,6 @@ import {NavbarComponent} from './parts/navbar/navbar.component';
 import {OrdersComponent} from './pages/orders/orders.component';
 import {UsersComponent} from './pages/users/users.component';
 import {CommonModule} from "@angular/common";
-import {UserListComponent} from './parts/user-list/user-list.component';
 import {UserCreateComponent} from './parts/user-create/user-create.component';
 import {PaginationComponent} from './parts/pagination/pagination.component';
 import {NgxPaginationModule} from "ngx-pagination";
@@ -26,7 +25,6 @@ import { CarouselAdminComponent } from './parts/carousel-admin/carousel-admin.co
     NavbarComponent,
     OrdersComponent,
     UsersComponent,
-    UserListComponent,
     UserCreateComponent,
     PaginationComponent,
     ProductComponent,

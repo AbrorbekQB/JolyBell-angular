@@ -56,3 +56,22 @@
   padding: 20px;
   border-radius: 5px;
 }
+
+.close__btn {
+  top: 8px;
+  right: 8px;
+}
+
+.admin__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.change-active-user {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.admin__content {
+  width: 300px;
+}

@@ -28,6 +28,8 @@ export class Utils {
 
   getUser() {
     let token = localStorage.getItem("Authorization")
+    if (!token || this.jwtHelper.isTokenExpired(token))
+      return
     // @ts-ignore
     return this.jwtHelper.decodeToken(token)
   }

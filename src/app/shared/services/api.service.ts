@@ -183,11 +183,13 @@ export class ApiService {
 
   // for Admin
   // user
-  getAllUser(): Observable<any> {
+  getAllUser(search: string, page: number): Observable<any> {
     return this.http.post(`${this.url}/admin/user/list`, {
-      "draw": 1,
-      "page": 0,
+      "page": page,
       "length": 10,
+      "filterData": {
+        "search": search
+      }
     })
   }
 
@@ -200,6 +202,10 @@ export class ApiService {
       password: data.password,
       phoneNumber: data.phoneNumber
     })
+  }
+
+  changeActiveUser(id: any) {
+    return this.http.get(`${this.url}/admin/user/change/active/${id}`)
   }
 
   // category

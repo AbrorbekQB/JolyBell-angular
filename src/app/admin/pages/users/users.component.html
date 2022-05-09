@@ -3,21 +3,68 @@
   <div class="section__wrapper">
     <div class="section--left">
       <app-sidebar (changeRoute)="changeRoute($event)"
-                   [activeRoute] = "activeRoute"></app-sidebar>
+                   [activeRoute]="activeRoute"></app-sidebar>
     </div>
     <div class="section--right">
       <div class="order_wrapper">
         <div class="filter__wrapper" *ngIf="activeRoute=='userList' || activeRoute==''">
-          <form class="search__form">
+          <form class="search__form" [formGroup]="searchForm">
             <div class="filter__item">
               <label>Search</label>
-              <input class="input--admin" type="text">
+              <input class="input--admin" type="text" formControlName="search" (keyup)="searching()">
             </div>
           </form>
         </div>
 
         <div class="order__content">
-          <app-user-list *ngIf="activeRoute=='userList' || activeRoute==''" [userData]=userList.data></app-user-list>
+          <!--          <app-user-list *ngIf="activeRoute=='userList' || activeRoute==''" [userData]=userList.data></app-user-list>-->
+          <div class="table__wrapper" *ngIf="activeRoute=='userList' || activeRoute==''">
+            <table class="order__table">
+              <thead>
+              <tr>
+                <th>Fullname</th>
+                <th>Active</th>
+                <th>Role</th>
+                <th>Created Date</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Province</th>
+              </tr>
+              </thead>
+              <tbody *ngIf="userList.data.length">
+              <tr *ngFor="let user of userList.data| paginate: {
+              itemsPerPage: 10,
+              currentPage: page,
+              totalItems: totalLength
+              }">
+                <td>
+                  {{user.lastname + " " + user.firstname + " " + user.patronymic}}
+                </td>
+                <td>
+                  <input type="checkbox" [checked]="user.active" (click)="openModal('changeStatus', user.id)">
+                  <!--                  <input type="checkbox" (click)="openModal('changeStatus', user.id)" *ngIf="!user.active">-->
+                </td>
+                <td>
+                  {{user.roles.join(', ')}}
+                </td>
+                <td>
+                  {{user.createDateTime}}
+                </td>
+                <td>
+                  {{user.username}}
+                </td>
+                <td>
+                  {{user.phoneNumber}}
+                </td>
+                <td>
+                  {{user.username}}
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls class="pagination-controls"
+                               (pageChange)="page = $event; updateUserList()"></pagination-controls>
           <app-user-create *ngIf="activeRoute=='userCreate'"
                            (changeRoute)="changeRoute($event)">
           </app-user-create>
@@ -26,3 +73,31 @@
     </div>
   </div>
 </div>
+<div class="admin__modal" *ngIf="modalState">
+  <div class="black-curtain" *ngIf="modalState"
+       (click)="closeModal();updateUserList()"></div>
+  <div class="admin__content">
+    <div class="close__btn" (click)="closeModal()">
+      <div class="inside"></div>
+    </div>
+    <h2 class="admin__header">Are you sure?</h2>
+    <form class="admin__form change-active-user">
+      <button class="btn success__btn" (click)="closeModal();changeActiveUser(param)" type="button">Update</button>
+      <button class="btn cancel__btn" (click)="closeModal();updateUserList()" type="button">Cancel</button>
+    </form>
+  </div>
+</div>
+<!--<div class="admin__modal" *ngIf="changeActiveCategoryModal || editCategoryModal">-->
+<!--  <div class="black-curtain" *ngIf="changeActiveCategoryModal"-->
+<!--       (click)="closeModal();updateCategoryTable('')"></div>-->
+<!--  <div class="admin__content" *ngIf="changeActiveCategoryModal">-->
+<!--    <div class="close__btn" (click)="closeModal();updateCategoryTable('')">-->
+<!--      <div class="inside"></div>-->
+<!--    </div>-->
+<!--    <h2 class="admin__header">Are you sure?</h2>-->
+<!--    <form class="admin__form change-active-category">-->
+<!--      <button class="btn success__btn" type="button" (click)="changeActiveCategory(categoryId)">Update</button>-->
+<!--      <button class="btn cancel__btn" type="button" (click)="closeModal();updateCategoryTable('')">Cancel</button>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--</div>-->

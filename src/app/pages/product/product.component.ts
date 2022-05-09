@@ -17,7 +17,7 @@ export class ProductComponent implements OnInit {
 
   public formOrder = new FormGroup({
     count: new FormControl(1),
-    size: new FormControl('')
+    size: new FormControl()
   })
   public count: number = 1
   public productDetail: any = {
@@ -46,7 +46,10 @@ export class ProductComponent implements OnInit {
     this.apiService.getById(this.productId).subscribe(res => {
       console.log(res)
       this.productDetail = res
-
+      this.formOrder.setValue({
+        count: 1,
+        size: res.productCountList[0].size
+      })
       if (this.productDetail.size.length) {
         this.formOrder.controls['size'].setValue(this.productDetail.size[0].toLowerCase())
       }
