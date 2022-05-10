@@ -72,9 +72,12 @@ export class BookingComponent implements OnInit {
           this.receiverDetailsObject.patronymic = res.patronymic
           this.receiverDetailsObject.phoneNumber = res.phoneNumber
           this.receiverDetailsObject.email = res.username
-          this.receiverDetailsObject.address = res.address
-          this.receiverDetailsObject.district = res.district
-          this.receiverDetailsObject.province = res.province
+          if (res.address)
+            this.receiverDetailsObject.address = res.address
+          if (res.district)
+            this.receiverDetailsObject.district = res.district
+          if (res.province)
+            this.receiverDetailsObject.province = res.province
           this.receiverDetailsForm.setValue(this.receiverDetailsObject)
 
           this.provinceList()

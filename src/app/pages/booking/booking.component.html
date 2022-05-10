@@ -73,7 +73,7 @@
               <span class="order__item__title" *ngIf="order.count == order.reservedCount">Quantity:
               <span>{{order.count}}</span></span>
               <span class="order__item__title warm__color" *ngIf="order.count != order.reservedCount"> Quantity:
-                <span class="success__color">{{order.reserverCount}}</span>/<span
+                <span class="success__color">{{order.reservedCount}}</span>/<span
                   class="error__color">{{order.count}}</span></span>
               <span class="order__item__cost">{{order.cost}} USD</span>
             </p>

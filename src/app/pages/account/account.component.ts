@@ -54,6 +54,9 @@ export class AccountComponent implements OnInit {
     this.apiService.getUserDetails().subscribe(res => {
       this.personalInfo = res;
 
+      if (!this.personalInfo.address)
+        this.personalInfo.address = ""
+
       this.provinceList()
       this.districtList(res.province)
       console.log(res)
