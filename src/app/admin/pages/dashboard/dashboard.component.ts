@@ -131,7 +131,8 @@ export class DashboardComponent implements OnInit {
           datasets: [{
             label: 'Province',
             data: this.orderReports.provinceDaily.data,
-            backgroundColor: ['#A2A1D9', '#151441', '#5fb263', '#e32db7'],
+            backgroundColor: ['#A2A1D9', '#151441', '#5fb263', '#e32db7','#EC7063',
+            '#9B59B6','#5499C7','#1ABC9C', '#16A085', '#F5B041', '#F1C40F', '#95A5A6'],
             hoverBorderColor: '#911c1c',
             borderColor: '#A2A1D9',
             borderWidth: 2

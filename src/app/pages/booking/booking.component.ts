@@ -64,7 +64,7 @@ export class BookingComponent implements OnInit {
         this.orderDetails = res
         this.orderLifeTime = res.orderLifeTime
         if (!this.orderDetails.orderItems.length)
-          this.router.navigate(['/'])
+          this.router.navigate(['/']).then()
 
         this.apiService.getUserDetails().subscribe(res => {
           this.receiverDetailsObject.name = res.firstname
